@@ -1,0 +1,13 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  }
+
+canvas {
+  display: block;
+}
