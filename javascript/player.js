@@ -9,7 +9,7 @@
   var value = 0;
   var direction = 1;
   var velocity = 3;
-  var minHeight = 0;
+  var minHeight = -100;
   var maxHeight = 300;
   var jumpPower = 15;
   var fallingSpeed = 9;
@@ -26,7 +26,7 @@ class Player {
       character_run_left = loadImage('picures/running_left.gif');
     //set player coordinates
       this.x = 20;
-      this.y = 0;
+      this.y = -110;
       this.w = 100;
       this.h = 100;
   }
@@ -51,7 +51,7 @@ class Player {
         }
       
     //jump
-      if (keyIsDown(UP_ARROW)){
+      if (keyIsDown(UP_ARROW) || keyIsDown(32)){
         jumping = true;
       } else{
         jumping = false;
@@ -100,6 +100,7 @@ class Player {
           image(character_stand_left, this.x, this.y, this.w, this.h);
         }
       }
+      rect(100,0,50,50);
     }
 
   //player camera

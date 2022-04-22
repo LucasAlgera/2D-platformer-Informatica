@@ -1,15 +1,15 @@
 //call other files
   var player;
   var gameBackground;
+  let fr = 6000;
 
 //0 = menu, 1 = cutscene, 2 = level nr.1, etc.
   var gameState = 0; 
 
-
 function setup() {
   createCanvas (928,600,WEBGL);
-  tent = loadImage('picures/tent.png');
-  campfire = loadImage('picures/campfire.gif');
+  frameRate(fr)
+  
 
   player = new Player();
   gameBackground = new Background();
@@ -39,11 +39,5 @@ function game_phase1 (){
     player.move();
     player.camera();
 
-  //tent
-    //rect(-300,0,250,110);  
-    image(tent,-300,0,250,110);
 
-  //campfire
-    //rect(-35,60,50,50);
-    image(campfire,-35,60,50,50);
 }
