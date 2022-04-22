@@ -3,7 +3,7 @@
   var [MOVESPEED, FALLSPEED] = [5,9]
   var player;
   var gameBackground;
-  let fr = 30;
+  let fr = 60;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
   var gameState = 0;
@@ -11,41 +11,19 @@
 //collision
   var COLLISION;
 
-  var ground      = new Block({x:-WIDTH/2,   y:0, w:WIDTH, h:40,   color:[0,255,0]});
-  var fire      = new Block({x:-35,  y:-40, w:50, h:60,   color:[0,255,0]});
+  var ground      = new Block({x:0,   y:0, w:2000, h:40,   color:[0,255,0]});
+  var fire      = new Block({x:-35,  y:-40, w:50, h:50,   color:[0,255,0]});
+  var pl1      = new Block({x:300,  y:-100, w:100, h:20,   color:[0,255,0]});
 
-  var blocks = [ground, fire];
+  var blocks = [ground, fire, pl1];
   console.log(blocks)
 
 function setup() {
-  createCanvas (WIDTH, HEIGHT,WEBGL);
+  createCanvas(windowWidth, HEIGHT,WEBGL);
   frameRate(fr)
 
   player = new Player();
   gameBackground = new Background();
-}
-
-function draw() {
-  // white background
-  background(255);
-  fill(0);  
-
-  // set player collision
-  COLLISION = checkCollision();
-
-  // draw the blocks
-  blocks.forEach(b => b.draw());
-
-  // draw the player
-  player.draw();  
-
-  // move the player
-  player.move();  
-
-  // move the camera
-  player.camera();
-
-  gameBackground.phase_1();
 }
 
 
@@ -55,6 +33,27 @@ function keyReleased() {
 			player.framesJumped = 0;
 			break;
 	}
+}
+
+function draw(){
+  //gameStates
+    if(gameState == 0){
+      game_phase1();
+    }
+}
+
+//gameStates
+function game_phase1 (){
+ //background
+  COLLISION = checkCollision();
+  blocks.forEach(b => b.draw());
+ 
+  gameBackground.phase_1();
+    
+  //player
+    player.draw();
+    player.move();
+    player.camera();
 }
 
 function checkCollision(){   
@@ -102,7 +101,7 @@ function checkCollision(){
           }
         }
 
-        //showDebug({ overlapX:overlapX, overlapY:overlapY, dx:dx, dy:dy, colliding:colliding});
+        // showDebug({ overlapX:overlapX, overlapY:overlapY, dx:dx, dy:dy, colliding:colliding});
       }
     }
 
@@ -113,9 +112,9 @@ function checkCollision(){
 
 function showDebug(options){
   fill(0)
-  text("overlapX: " + options.overlapX,10,20)
-  text("dx: " + options.dx,100,20)
-  text("overlapY: "   + options.overlapY,10,40)        
-  text("dy: " + options.dy,100,40)
-  text("colliding: " + options.colliding,10,60)
+  console.log("overlapX: " + options.overlapX,10,20)
+  console.log("dx: " + options.dx,100,20)
+  console.log("overlapY: "   + options.overlapY,10,40)        
+  console.log("dy: " + options.dy,100,40)
+  console.log("colliding: " + options.colliding,10,60)
 }
