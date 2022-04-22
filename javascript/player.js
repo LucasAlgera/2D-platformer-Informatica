@@ -100,11 +100,10 @@ class Player {
           image(character_stand_left, this.x, this.y, this.w, this.h);
         }
       }
-      rect(100,0,50,50);
     }
 
   //player camera
     camera(){
-      camera.setPosition(this.x, -110,400);
+      camera.setPosition(this.x, -190,400);
     }
 }
