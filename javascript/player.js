@@ -16,94 +16,74 @@
   var jumping = false;
   var jumpCounter = 0;
 
-class Player {
+class Player{
+
   constructor() {
-    //load in pictures
-      camera = createCamera();
-      character_stand_right = loadImage('picures/standing_right.gif');
-      character_stand_left = loadImage('picures/standing_left.gif');
-      character_run_right = loadImage('picures/running_right.gif');
-      character_run_left = loadImage('picures/running_left.gif');
-    //set player coordinates
-      this.x = 20;
-      this.y = -110;
-      this.w = 100;
-      this.h = 100;
+    camera = createCamera();
+    this.x = 50;
+    this.y = 0;
+    this.w = 30;
+    this.h = 30;
+    this.color = [255, 204, 0];       
+    
+
+    // for easy readable calculation
+    this.halfWidth = this.w / 2;
+    this.halfHeight = this.h / 2 ;
+
+    // jump variables    
+    this.maxJumpframes = 20;
+    this.framesJumped = 0;
   }
 
-  //gravity
-    gravity(){
-      if (this.y >= minHeight && jumping == false){
-        this.x = this.x
-        jumpCounter = 0;
-      } else{
-        this.y = this.y + (direction*velocity)
-      }
-    }
-  //player movement
-    move(){
-    //run
-      if (keyIsDown(LEFT_ARROW)){
-          this.x -= 5;
-      }
-      if (keyIsDown(RIGHT_ARROW)) {
-          this.x += 5;  
-        }
-      
-    //jump
-      if (keyIsDown(UP_ARROW) || keyIsDown(32)){
-        jumping = true;
-      } else{
-        jumping = false;
-      }
-      if(jumping == true){
-        if(jumpCounter >= jumpPower){
-          if(this.y >= minHeight){
-            this.y = minHeight; 
-          } else{
-            velocity = fallingSpeed;
-          }
-        }else{
-          velocity = -jumpPower;
-          jumpCounter++;
-        }
-      } else{
-        velocity = fallingSpeed;
-      }
-    }
-  //draw player
-    draw(){
-      //rect(this.x, this.y, this.w, this.h);
-      
-    //direction the player is facing
-      if (keyIsDown(RIGHT_ARROW)) {
-        value = 0;
-      }
-      if (keyIsDown(LEFT_ARROW)) {
-        value = 1;
-      }
+  move(){
+
+    // start with gravity
+    this.gravity();
   
-      
-    //different pictures for different actions
-      if (keyIsDown(RIGHT_ARROW) && value == 0) {
-        image(character_run_right, this.x, this.y, this.w, this.h);
-      } else{
-        if(value == 0){
-          image(character_stand_right, this.x, this.y, this.w, this.h);
-        }
-      }
-  
-      if (keyIsDown(LEFT_ARROW)) {
-        image(character_run_left, this.x, this.y, this.w, this.h);
-      } else{
-        if(value == 1){
-          image(character_stand_left, this.x, this.y, this.w, this.h);
-        }
-      }
+    if (keyIsDown(65)){
+      if(COLLISION != "left" && this.x >= 0)
+        this.x -= MOVESPEED;
     }
 
-  //player camera
-    camera(){
-      camera.setPosition(this.x, -190,400);
+    if (keyIsDown(68)) {
+      if(COLLISION != "right" && this.x + this.w < WIDTH)
+        this.x += MOVESPEED;              
     }
+
+
+    // if (keyIsDown(UP_ARROW)) {
+    //   if(COLLISION != "top")
+    //     this.y -= MOVESPEED;              
+    // }
+
+    // if (keyIsDown(DOWN_ARROW)) {
+    //   if(COLLISION != "bottom")
+    //     this.y += MOVESPEED;              
+    // }
+
+    
+    // spatie
+    if (keyIsDown(32)) {      
+      if(this.framesJumped < this.maxJumpframes){
+        this.y -= 13;
+        this.framesJumped += 1;
+      }
+    }
+   
+  }
+
+  gravity(){
+    if(COLLISION != "bottom"){
+      this.y += FALLSPEED;
+    }
+  }
+ 
+  draw(){    
+    fill(this.color)
+    rect(this.x, this.y, this.w, this.h);
+  }
+  camera(){
+    camera.setPosition(this.x, -190,400);
+  }
 }

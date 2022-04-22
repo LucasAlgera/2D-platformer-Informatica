@@ -10,6 +10,6 @@ body {
 
 canvas {
   display: block;
-    border-radius: 25px;
+  border-radius: 25px;
   border: 5px solid purple;
 }

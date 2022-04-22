@@ -13,5 +13,6 @@ class Block{
 
   draw(){
     fill(this.color)
+    rect(this.x, this.y, this.w, this.h);
   }
 }
