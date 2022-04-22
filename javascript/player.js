@@ -20,11 +20,14 @@ class Player{
 
   constructor() {
     camera = createCamera();
-    this.x = 50;
-    this.y = 0;
-    this.w = 30;
-    this.h = 30;
-    this.color = [255, 204, 0];       
+    character_stand_right = loadImage('picures/player/standing_right.gif');
+    character_stand_left = loadImage('picures/player/standing_left.gif');
+    character_run_right = loadImage('picures/player/running_right.gif');
+    character_run_left = loadImage('picures/player/running_left.gif');
+    this.x = 20;
+    this.y = -110;
+    this.w = 100;
+    this.h = 100;    
     
 
     // for easy readable calculation
@@ -49,6 +52,10 @@ class Player{
     if (keyIsDown(68)) {
       if(COLLISION != "right" && this.x + this.w < WIDTH)
         this.x += MOVESPEED;              
+    }
+
+    if (keyIsDown(8)) {
+      console.log(this)           
     }
 
 
@@ -79,10 +86,36 @@ class Player{
     }
   }
  
-  draw(){    
-    fill(this.color)
-    rect(this.x, this.y, this.w, this.h);
-  }
+  //draw player
+    draw(){
+      //rect(this.x, this.y, this.w, this.h);
+      
+    //direction the player is facing
+      if (keyIsDown(68)) {
+        value = 0;
+      }
+      if (keyIsDown(65)) {
+        value = 1;
+      }
+  
+      
+    //different pictures for different actions
+      if (keyIsDown(68) && value == 0) {
+        image(character_run_right, this.x, this.y, this.w, this.h);
+      } else{
+        if(value == 0){
+          image(character_stand_right, this.x, this.y, this.w, this.h);
+        }
+      }
+  
+      if (keyIsDown(65)) {
+        image(character_run_left, this.x, this.y, this.w, this.h);
+      } else{
+        if(value == 1){
+          image(character_stand_left, this.x, this.y, this.w, this.h);
+        }
+      }
+    }
   camera(){
     camera.setPosition(this.x, -190,400);
   }

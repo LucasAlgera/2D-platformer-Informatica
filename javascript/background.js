@@ -7,7 +7,7 @@ class Background {
       var imageLength = 2000;
 
     //layer 1 
-      translate(0,0,-45);
+      translate(0,0,-50);
       for (var layer_10X = -928/2; layer_10X < imageLength; layer_10X+=layer_10.width) {
         image(layer_10, layer_10X,-height-130);
       }
@@ -19,7 +19,7 @@ class Background {
       }
 
     //layer 2
-      translate(0,0,30);
+      translate(0,0,25);
       for (var layer_7X = -928/2; layer_7X < imageLength; layer_7X+=layer_7.width) {
         image(layer_7, layer_7X,-height-130);
       }
@@ -31,7 +31,7 @@ class Background {
       }
 
     //layer 3
-      translate(0,0,15);
+      translate(0,0,24);
       for (var layer_4X = -928/2; layer_4X < imageLength; layer_4X+=layer_4.width) {
         image(layer_4, layer_4X,-height-130);
       }
@@ -46,7 +46,7 @@ class Background {
         image(tent,-300,-100,250,110);
         image(campfire,-35,-40,50,50);
     //layer 5
-      translate(0,0,0);
+      translate(0,0,1);
       for (var layer_1X = -928/2; layer_1X < imageLength; layer_1X+=layer_1.width) {
         image(layer_1, layer_1X,-height-130);
       }

@@ -3,7 +3,7 @@
   var [MOVESPEED, FALLSPEED] = [5,9]
   var player;
   var gameBackground;
-  let fr = 6000;
+  let fr = 30;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
   var gameState = 0;
@@ -11,10 +11,10 @@
 //collision
   var COLLISION;
 
-  var ground      = new Block({x:0,   y:0, w:WIDTH, h:40,   color:[0,255,0]});
-  var wall-left   = new Block({x:0,   y:0, w:WIDTH, h:40,   color:[0,255,0]});
+  var ground      = new Block({x:-WIDTH/2,   y:0, w:WIDTH, h:40,   color:[0,255,0]});
+  var fire      = new Block({x:-35,  y:-40, w:50, h:60,   color:[0,255,0]});
 
-  var blocks = [ground];
+  var blocks = [ground, fire];
   console.log(blocks)
 
 function setup() {
@@ -22,7 +22,7 @@ function setup() {
   frameRate(fr)
 
   player = new Player();
-  // gameBackground = new Background();
+  gameBackground = new Background();
 }
 
 function draw() {
@@ -44,6 +44,8 @@ function draw() {
 
   // move the camera
   player.camera();
+
+  gameBackground.phase_1();
 }
 
 
