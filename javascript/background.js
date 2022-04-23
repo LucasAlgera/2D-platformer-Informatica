@@ -65,6 +65,6 @@ class Background {
     layer_8 = loadImage('data/background/Layer_0007_Lights.png');
     layer_9 = loadImage('data/background/Layer_0008_3.png');
     layer_10 = loadImage('data/background/Layer_0009_2.png');
-    tent = loadImage('picures/tent.png');
-    campfire = loadImage('picures/campfire.gif');
+    tent = loadImage('data/random/tent.png');
+    campfire = loadImage('data/random/campfire.gif');
   }

@@ -2,28 +2,5 @@ https://www.google.com/url?sa=i&url=https%3A%2F%2Fwifflegif.com%2Fgifs%2F706410-
 https://www.google.com/url?sa=i&url=http%3A%2F%2Fpixelartmaker.com%2Fart%2F6e20fb65983a26d&psig=AOvVaw2-ARhbVtVAJDeD3DPh3tFz&ust=1649845722802000&source=images&cd=vfe&ved=0CAcQjRxqFwoTCJj477KojvcCFQAAAAAdAAAAABAQ
 
 https://stackoverflow.com/questions/39341564/webgl-how-to-correctly-blend-alpha-channel-png
-
-
-function draw(){
-  //gameStates
-    if(gameState == 0){
-      game_phase1();
-    }
-}
-
-//gameStates
-function game_phase1 (){
- //background
- 
-  gameBackground.phase_1();
-    
-  //player
-    player.gravity();
-    player.draw();
-    player.move();
-    player.camera();
-
-
-}
-
-    <script src="javascript/background.js"></script>
+https://www.youtube.com/watch?v=tBDVLey1DIE
+https://keycode.info/for/enter

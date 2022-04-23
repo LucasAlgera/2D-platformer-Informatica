@@ -2,20 +2,24 @@
   var [WIDTH, HEIGHT] = [928, 600];
   var [MOVESPEED, FALLSPEED] = [5,9]
   var player;
-  var gameBackground;
+  var GameBackground;
   let fr = 60;
+  var fall;
+  var music;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
-  var gameState = 0;
+  var gameState = 1;
+  let cutscene
 
 //collision
   var COLLISION;
 
-  var ground      = new Block({x:0,   y:0, w:2000, h:40,   color:[0,255,0]});
-  var fire      = new Block({x:-35,  y:-40, w:50, h:50,   color:[0,255,0]});
-  var pl1      = new Block({x:300,  y:-100, w:100, h:20,   color:[0,255,0]});
+  var ground   = new Block({x:-400,   y:0, w:2000, h:40,   color:[0,255,0], draw:true});
+  var left    = new Block({x:-400,   y:-500, w:5, h:500,   color:[0,255,0], draw:true});
+  var fire     = new Block({x:-35,  y:-50, w:50, h:60,   color:[0,255,0], draw:true});
+  var pl1      = new Block({x:300,  y:-200, w:100, h:20,   color:[0,255,0], draw:true});
 
-  var blocks = [ground, fire, pl1];
+  var blocks = [ground, left, fire, pl1];
   console.log(blocks)
 
 function setup() {
@@ -23,9 +27,15 @@ function setup() {
   frameRate(fr)
 
   player = new Player();
-  gameBackground = new Background();
-}
+  GameBackground = new Background();
 
+  // video-music inladen
+  fall = loadSound('data/sound/fall.mp3');
+  music = loadSound('data/sound/background.mp3');
+  //cutscene = createVideo( ['data/video/cuntscene.mov']);
+  //cutscene.size (100,100);
+
+}
 
 function keyReleased() {
 	switch(keyCode) {
@@ -35,20 +45,32 @@ function keyReleased() {
 	}
 }
 
-function draw(){
+function draw(){  
+  background(0);
+
   //gameStates
     if(gameState == 0){
+      game_phase0();
+    }    
+    if(gameState == 1){
       game_phase1();
     }
 }
 
 //gameStates
+
+function game_phase0(){
+  //console.log("test")
+  //cutscene.volume(1);
+  //cutscene.play();
+}
+
 function game_phase1 (){
  //background
   COLLISION = checkCollision();
   blocks.forEach(b => b.draw());
  
-  gameBackground.phase_1();
+  GameBackground.phase_1();
     
   //player
     player.draw();
