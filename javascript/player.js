@@ -13,8 +13,8 @@
   var jumpPower = -20;
   var fallingSpeed = 2;
   var num = 0;
-  var old = 0;
-  var old2 = 0;
+  var active = true;
+
 
 class Player{
 
@@ -86,13 +86,24 @@ class Player{
   }
 
   gravity(){
-    if(COLLISION != "bottom"){
+    if(COLLISION != "bottom" && active){
       this.y += velocity
       velocity += fallingSpeed
     }
     if(COLLISION == "bottom"){
       velocity = 0;
-    }    
+    }
+    if(num == 5){
+      player.x = 30;
+      player.y = -110;
+      num = 0;
+    }
+    if(player.y > (ground.y + 20)){
+      num += 1;
+      player.x -= 30 * num; 
+      player.y = -200;
+      velocity = 0;
+    }
   }
  
   //draw player
