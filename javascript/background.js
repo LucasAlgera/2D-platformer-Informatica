@@ -2,6 +2,7 @@ class Background {
   constructor() {
     
   }
+  
   phase_1(){
     //how long are the background pictures
       var imageLength = 2000;
@@ -51,8 +52,8 @@ class Background {
         image(layer_1, layer_1X,-height-130);
       }
   }
+  
 }
-
 //load in the pictures
   function preload() {
     layer_1 = loadImage('data/background/Layer_0000_9.png');

@@ -10,7 +10,7 @@
   var music;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
-  var gameState = 0;
+  var gameState =0;
   let cutscene
 
 //framerate
@@ -62,17 +62,19 @@ function draw(){
   //gameStates
     if(gameState == 0){
       game_phase0();
-    }    
+    }
     if(gameState == 1){
       game_phase1();
     }
-}
+  }
 
 //gameStates
 function game_phase0(){
   MenuBackground.phase_1();  
   MenuBackground.camera();
-
+    if (keyIsDown(13)){
+      gameState = 1;
+    }
 }
 
 function game_phase1 (){

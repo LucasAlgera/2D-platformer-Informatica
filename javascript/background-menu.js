@@ -78,7 +78,9 @@ class BackgroundMenu {
     layer_9 = loadImage('data/background/Layer_0008_3.png');
     layer_10 = loadImage('data/background/Layer_0009_2.png');
     title = loadImage('data/random/menu/title.png');
-    exit = loadImage('data/random/menu/exit.png')
-    play = loadImage('data/random/menu/play.png')
-    options = loadImage('data/random/menu/options.png')
+    exit = loadImage('data/random/menu/exit.png');
+    play = loadImage('data/random/menu/play.png');
+    options = loadImage('data/random/menu/options.png');
+    tent = loadImage('data/random/tent.png');
+    campfire = loadImage('data/random/campfire.gif');
   }
