@@ -1,39 +1,50 @@
-//call other files
+//set width, height, speed and fallspeed
   var [WIDTH, HEIGHT] = [928, 600];
   var [MOVESPEED, FALLSPEED] = [5,9]
+
+//call other files
   var player;
   var GameBackground;
-  let fr = 60;
+  var MenuBackground;
   var fall;
   var music;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
-  var gameState = 1;
+  var gameState = 0;
   let cutscene
+
+//framerate
+  let fr = 60;
 
 //collision
   var COLLISION;
 
+//blocks in game
   var ground   = new Block({x:-400,   y:0, w:2000, h:40,   color:[0,255,0], draw:true});
   var left    = new Block({x:-400,   y:-500, w:5, h:500,   color:[0,255,0], draw:true});
   var fire     = new Block({x:-35,  y:-50, w:50, h:60,   color:[0,255,0], draw:true});
   var pl1      = new Block({x:300,  y:-200, w:100, h:20,   color:[0,255,0], draw:true});
+  var pl2     = new Block({x:200,  y:-100, w:100, h:20,   color:[0,255,0], draw:true});
 
-  var blocks = [ground, left, fire, pl1];
+  var blocks = [ground, left, fire, pl1, pl2];
   console.log(blocks)
 
+
 function setup() {
-  createCanvas(windowWidth, HEIGHT,WEBGL);
+  createCanvas(WIDTH, HEIGHT,WEBGL);
   frameRate(fr)
 
   player = new Player();
   GameBackground = new Background();
+  MenuBackground = new BackgroundMenu();
 
   // video-music inladen
-  fall = loadSound('data/sound/fall.mp3');
-  music = loadSound('data/sound/background.mp3');
-  //cutscene = createVideo( ['data/video/cuntscene.mov']);
-  //cutscene.size (100,100);
+    fall = loadSound('data/sound/fall.mp3');
+    music = loadSound('data/sound/background.mp3');
+  
+  //cutscene
+    //cutscene = createVideo( ['data/video/cuntscene.mov']);
+    //cutscene.size (100,100);
 
 }
 
@@ -58,11 +69,10 @@ function draw(){
 }
 
 //gameStates
-
 function game_phase0(){
-  //console.log("test")
-  //cutscene.volume(1);
-  //cutscene.play();
+  MenuBackground.phase_1();  
+  MenuBackground.camera();
+
 }
 
 function game_phase1 (){
@@ -78,6 +88,8 @@ function game_phase1 (){
     player.camera();
 }
 
+
+//COLLISION CHECK
 function checkCollision(){   
 
   colliding = false;
@@ -132,6 +144,7 @@ function checkCollision(){
   return colliding;
 }
 
+//show collision in console
 function showDebug(options){
   fill(0)
   console.log("overlapX: " + options.overlapX,10,20)

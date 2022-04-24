@@ -11,9 +11,10 @@
   var direct = 0;
   var velocity = 0;
   var jumpPower = -20;
-  var fallingSpeed = 2;
+  var fallingSpeed = 1.5;
   var num = 0;
   var active = true;
+  var double = false;
 
 
 class Player{
@@ -63,10 +64,6 @@ class Player{
       music.loop();
     }
 
-
-    
-
-
     // if (keyIsDown(UP_ARROW)) {
     //   if(COLLISION != "top")
     //     this.y -= MOVESPEED;              
@@ -79,10 +76,9 @@ class Player{
 
     
     // spatie
-    if (keyIsDown(32) && COLLISION == "bottom") {
-      velocity += jumpPower;
-    }
-   
+      if (keyIsDown(32) && COLLISION == "bottom") {
+        velocity += jumpPower;
+      }   
   }
 
   gravity(){
