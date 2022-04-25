@@ -9,13 +9,10 @@
 
 //set class variables
   var direct = 0;
-  var velocity = 0;
-  var jumpPower = -20;
-  var fallingSpeed = 1.5;
+  var vely = 0;
+  var velx = 0;
+  var jumpPower = -25;
   var num = 0;
-  var active = true;
-  var double = false;
-
 
 class Player{
 
@@ -45,25 +42,46 @@ class Player{
     // start with gravity
     this.gravity();
   
-    if (keyIsDown(65)){
-      if(COLLISION != "left" )//&& this.x >= 0)
-        this.x -= MOVESPEED;
+    if (keyIsDown(65) && !keyIsDown(68)){
+      if(COLLISION != "left")//&& this.x >= 0)
+        if (velx > -MOVESPEED){
+          velx -= 1;
+        }
     }
 
-    if (keyIsDown(68)) {
-      if(COLLISION != "right" )//&& this.x + this.w < WIDTH)
-        this.x += MOVESPEED;              
+    if (keyIsDown(68) && !keyIsDown(65)){
+      if(COLLISION != "right" && COLLISION == "bottom")//&& this.x + this.w < WIDTH)
+        if (velx < MOVESPEED){
+          velx += 1;
+        }
     }
-  // backspace
-    if (keyIsDown(8)) {
-      console.log(this)
-    }
+    if (!keyIsDown(68) && !keyIsDown(65) && velx != 0 || keyIsDown(68) && keyIsDown(65) && velx != 0){
+      if (velx < 0){
+        if ((velx + 4) > 0) {
+          console.log(velx + 4);
+          velx += (-velx);
+        }
+        else {
+          velx += 1;
+        }
+      }
+      if (velx > 0){
+        if ((velx - 4) < 0){
+          console.log(velx - 4);
+          velx -= (velx);
+        }
+        else {
+          velx -= 1;
+        }
+      }
+    }   
+    this.x += velx;
 
-  // enter
-    if (keyIsDown(13)) {
-      music.loop();
-    }
-
+    // spatie
+      if (keyIsDown(32) && COLLISION == "bottom") {
+        vely += jumpPower;
+      } 
+  
     // if (keyIsDown(UP_ARROW)) {
     //   if(COLLISION != "top")
     //     this.y -= MOVESPEED;              
@@ -74,21 +92,11 @@ class Player{
     //     this.y += MOVESPEED;              
     // }
 
-    
-    // spatie
-      if (keyIsDown(32) && COLLISION == "bottom") {
-        velocity += jumpPower;
-      }   
-  }
+    // backspace
+    if (keyIsDown(8)) {
+      console.log(this)
+    }
 
-  gravity(){
-    if(COLLISION != "bottom" && active){
-      this.y += velocity
-      velocity += fallingSpeed
-    }
-    if(COLLISION == "bottom"){
-      velocity = 0;
-    }
     if(num == 5){
       player.x = 30;
       player.y = -110;
@@ -96,9 +104,25 @@ class Player{
     }
     if(player.y > (ground.y + 20)){
       num += 1;
-      player.x -= 30 * num; 
+      player.x -= 50 * num; 
       player.y = -200;
-      velocity = 0;
+      vely = 0;
+    }
+
+  // esc
+    if (keyIsDown(27)) {
+      //throw new Error("You want to exit huh?");
+      fail;
+    }
+  }
+
+  gravity(){
+    if(COLLISION != "bottom"){
+      this.y += vely
+      vely += FALLSPEED
+    }
+    if(COLLISION == "bottom"){
+      vely = 0;
     }
   }
  
@@ -120,6 +144,7 @@ class Player{
         image(character_run_right, this.x, this.y, this.w, this.h);
       } else if (keyIsDown(17) && direct == 0) {
         image(dead_right, this.x, this.y, this.w, this.h);
+        
         fall.play();
       } else{
         if(direct == 0){
@@ -131,6 +156,7 @@ class Player{
         image(character_run_left, this.x, this.y, this.w, this.h);
       } else if (keyIsDown(17) && direct == 1) {
         image(dead_left, this.x, this.y, this.w, this.h);
+        
         fall.play();
       } else{
         if(direct == 1){

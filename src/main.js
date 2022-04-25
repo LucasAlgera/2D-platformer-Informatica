@@ -1,6 +1,6 @@
 //set width, height, speed and fallspeed
-  var [WIDTH, HEIGHT] = [928, 600];
-  var [MOVESPEED, FALLSPEED] = [5,9]
+  var [WIDTH, HEIGHT] = [window.innerWidth, 600];
+  var [MOVESPEED, FALLSPEED] = [20,2]
 
 //call other files
   var player;
@@ -20,7 +20,7 @@
   var COLLISION;
 
 //blocks in game
-  var ground   = new Block({x:-400,   y:0, w:2000, h:40,   color:[0,255,0], draw:true});
+  var ground   = new Block({x:-400,   y:0, w:4000, h:40,   color:[0,255,0], draw:true});
   var left    = new Block({x:-400,   y:-500, w:5, h:500,   color:[0,255,0], draw:true});
   var fire     = new Block({x:-35,  y:-50, w:50, h:60,   color:[0,255,0], draw:true});
   var pl1      = new Block({x:300,  y:-200, w:100, h:20,   color:[0,255,0], draw:true});
@@ -37,23 +37,11 @@ function setup() {
   player = new Player();
   GameBackground = new Background();
   MenuBackground = new BackgroundMenu();
-
-  // video-music inladen
-    fall = loadSound('data/sound/fall.mp3');
-    music = loadSound('data/sound/background.mp3');
   
   //cutscene
     //cutscene = createVideo( ['data/video/cuntscene.mov']);
     //cutscene.size (100,100);
 
-}
-
-function keyReleased() {
-	switch(keyCode) {
-		case 32:
-			player.framesJumped = 0;
-			break;
-	}
 }
 
 function draw(){  
@@ -74,14 +62,14 @@ function game_phase0(){
   MenuBackground.camera();
     if (keyIsDown(13)){
       gameState = 1;
+      music.loop();
     }
 }
 
 function game_phase1 (){
  //background
-  COLLISION = checkCollision();
   blocks.forEach(b => b.draw());
- 
+  COLLISION = checkCollision();
   GameBackground.phase_1();
     
   //player
@@ -155,3 +143,5 @@ function showDebug(options){
   console.log("dy: " + options.dy,100,40)
   console.log("colliding: " + options.colliding,10,60)
 }
+
+                                              

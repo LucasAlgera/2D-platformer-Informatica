@@ -1,11 +1,12 @@
-class Background {
-  constructor() {
-    
-  }
+class BackgroundMenu {
   
+  constructor() {
+    let menucamera;
+    this.menucameraX = 200;
+  }
   phase_1(){
     //how long are the background pictures
-      var imageLength = 2000;
+      var imageLength = 4000;
 
     //layer 1 
       translate(0,0,-50);
@@ -44,28 +45,22 @@ class Background {
       }
     //layer 4
       translate(0,0,0);
-        image(tent,-300,-100,250,110);
-        image(campfire,-35,-40,50,50);
-    //layer 5
-      translate(0,0,1);
       for (var layer_1X = -928/2; layer_1X < imageLength; layer_1X+=layer_1.width) {
         image(layer_1, layer_1X,-height-130);
       }
+    
+    //title
+      image(title, this.menucameraX-220,-550, 500, 330);
+      image(play, this.menucameraX-120,-220, 225, 65);
+      image(options, this.menucameraX-120,-170, 225, 65);
+      image(exit, this.menucameraX-120,-120, 225, 65);
   }
-  
+  camera(){
+    this.menucameraX = this.menucameraX +1;
+    createcam.setPosition(this.menucameraX, -230,450);
+
+    if(this.menucameraX > 3900){
+      this.menucameraX = 210;
+    }
+  }
 }
-//load in the pictures
-  function preload() {
-    layer_1 = loadImage('data/background/Layer_0000_9.png');
-    layer_2 = loadImage('data/background/Layer_0001_8.png');
-    layer_3 = loadImage('data/background/Layer_0002_7.png');
-    layer_4 = loadImage('data/background/Layer_0003_6.png');
-    layer_5 = loadImage('data/background/Layer_0004_Lights.png');
-    layer_6 = loadImage('data/background/Layer_0005_5.png');
-    layer_7 = loadImage('data/background/Layer_0006_4.png');
-    layer_8 = loadImage('data/background/Layer_0007_Lights.png');
-    layer_9 = loadImage('data/background/Layer_0008_3.png');
-    layer_10 = loadImage('data/background/Layer_0009_2.png');
-    tent = loadImage('data/random/tent.png');
-    campfire = loadImage('data/random/campfire.gif');
-  }
