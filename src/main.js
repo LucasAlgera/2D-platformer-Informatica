@@ -1,6 +1,6 @@
 //set width, height, speed and fallspeed
   var [WIDTH, HEIGHT] = [window.innerWidth, 600];
-  var [MOVESPEED, FALLSPEED] = [20,2]
+  var [MOVESPEED, FALLSPEED] = [10,2]
 
 //call other files
   var player;

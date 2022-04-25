@@ -43,35 +43,41 @@ class Player{
     this.gravity();
   
     if (keyIsDown(65) && !keyIsDown(68)){
-      if(COLLISION != "left" && COLLISION == "bottom")//&& this.x >= 0)
-        if (velx > -MOVESPEED){
-          velx -= 1;
+      if(COLLISION != "left" && COLLISION == "bottom"){//&& this.x >= 0)
+        if (velx > 0){
+          velx -= (velx);
         }
+        if (velx > -MOVESPEED && velx <= 0){
+          velx -= 2;
+        }
+      }
     }
 
     if (keyIsDown(68) && !keyIsDown(65)){
-      if(COLLISION != "right" && COLLISION == "bottom")//&& this.x + this.w < WIDTH)
-        if (velx < MOVESPEED){
-          velx += 1;
+      if(COLLISION != "right" && COLLISION == "bottom"){//&& this.x + this.w < WIDTH)
+        if (velx < 0){
+          velx += (-velx);
         }
+        if (velx < MOVESPEED && velx >= 0){
+          velx += 2;
+        }
+      }
     }
     if (!keyIsDown(68) && !keyIsDown(65) && velx != 0 || keyIsDown(68) && keyIsDown(65) && velx != 0){
       if (velx < 0){
         if ((velx + 4) > 0) {
-          console.log(velx + 4);
           velx += (-velx);
         }
         else {
-          velx += 1;
+          velx += 4;
         }
       }
       if (velx > 0){
         if ((velx - 4) < 0){
-          console.log(velx - 4);
           velx -= (velx);
         }
         else {
-          velx -= 1;
+          velx -= 4;
         }
       }
     }
