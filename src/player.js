@@ -43,7 +43,7 @@ class Player{
     this.gravity();
   
     if (keyIsDown(65) && !keyIsDown(68)){
-      if(COLLISION != "left")//&& this.x >= 0)
+      if(COLLISION != "left" && COLLISION == "bottom")//&& this.x >= 0)
         if (velx > -MOVESPEED){
           velx -= 1;
         }
@@ -74,7 +74,11 @@ class Player{
           velx -= 1;
         }
       }
-    }   
+    }
+    if (COLLISION == "right" || COLLISION == "left") {
+      velx = 0;
+    }
+      
     this.x += velx;
 
     // spatie
@@ -101,12 +105,14 @@ class Player{
       player.x = 30;
       player.y = -110;
       num = 0;
+      velx = 0;
     }
     if(player.y > (ground.y + 20)){
       num += 1;
       player.x -= 50 * num; 
       player.y = -200;
       vely = 0;
+      velx = 0;
     }
 
   // esc

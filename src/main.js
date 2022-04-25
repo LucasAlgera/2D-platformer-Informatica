@@ -35,8 +35,9 @@ function setup() {
   frameRate(fr)
 
   player = new Player();
-  GameBackground = new Background();
   MenuBackground = new BackgroundMenu();
+  GameBackground = new Background();
+
   
   //cutscene
     //cutscene = createVideo( ['data/video/cuntscene.mov']);
