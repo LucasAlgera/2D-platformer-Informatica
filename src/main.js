@@ -10,7 +10,7 @@
   var music;
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
-  var gameState =0;
+  var gameState = 0;
   let cutscene
 
 //framerate

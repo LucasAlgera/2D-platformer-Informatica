@@ -27,8 +27,8 @@ class Player{
     
     this.x = 30;
     this.y = -110;
-    this.w = 80;
-    this.h = 80;    
+    this.w = 70;
+    this.h = 70;    
     
 
     // for easy readable calculation
@@ -43,26 +43,17 @@ class Player{
     this.gravity();
   
     if (keyIsDown(65) && !keyIsDown(68)){
-      if(COLLISION != "left" && COLLISION == "bottom"){//&& this.x >= 0)
-        if (velx > 0){
-          velx -= (velx);
-        }
-        if (velx > -MOVESPEED && velx <= 0){
-          velx -= 2;
-        }
+      if(COLLISION != "left"){//&& this.x >= 0)
+        velx = -MOVESPEED
       }
     }
 
     if (keyIsDown(68) && !keyIsDown(65)){
-      if(COLLISION != "right" && COLLISION == "bottom"){//&& this.x + this.w < WIDTH)
-        if (velx < 0){
-          velx += (-velx);
-        }
-        if (velx < MOVESPEED && velx >= 0){
-          velx += 2;
-        }
+      if(COLLISION != "right"){//&& this.x + this.w < WIDTH)
+        velx = MOVESPEED
       }
     }
+    
     if (!keyIsDown(68) && !keyIsDown(65) && velx != 0 || keyIsDown(68) && keyIsDown(65) && velx != 0){
       if (velx < 0){
         if ((velx + 4) > 0) {
@@ -107,18 +98,19 @@ class Player{
       console.log(this)
     }
 
-    if(num == 5){
-      player.x = 30;
-      player.y = -110;
-      num = 0;
-      velx = 0;
-    }
     if(player.y > (ground.y + 20)){
-      num += 1;
-      player.x -= 50 * num; 
-      player.y = -200;
-      vely = 0;
-      velx = 0;
+      if(num == 5){
+        player.x = 30;
+        player.y = -110;
+        num = 0;
+        velx = 0;
+      } else {
+        num += 1;
+        player.x -= 50 * num; 
+        player.y = -200;
+        vely = 0;
+        velx = 0;
+      }
     }
 
   // esc
