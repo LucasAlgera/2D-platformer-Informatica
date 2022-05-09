@@ -39,8 +39,9 @@ function setup() {
 
   
   //cutscene
-    //cutscene = createVideo( ['data/video/cuntscene.mov']);
-    //cutscene.size (100,100);
+    cutscene = createVideo(['data/video/cutscene.mov']);
+    cutscene.hide(); //puts video inside of the canvas
+    cutscene.onended(cutDone); //check when cutscene is done playing
 
 }
 
@@ -54,6 +55,9 @@ function draw(){
     if(gameState == 1){
       game_phase1();
     }
+    if(gameState == 2){
+      game_phase2();
+    }
   }
 
 //gameStates
@@ -63,10 +67,19 @@ function game_phase0(){
     if (keyIsDown(13)){
       gameState = 1;
       music.loop();
+      cutscene.play()
     }
 }
-
 function game_phase1 (){
+  image(cutscene, 100, -600,1000,600);
+}
+
+//after cutscene is done playing
+function cutDone() {
+  gameState++;
+}
+
+function game_phase2 (){
  //background
   blocks.forEach(b => b.draw());
   COLLISION = checkCollision();
