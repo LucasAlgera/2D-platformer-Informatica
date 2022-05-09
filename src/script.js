@@ -72,6 +72,10 @@ function game_phase0(){
 }
 function game_phase1 (){
   image(cutscene, 100, -600,1000,600);
+  if(keyIsDown(32)){
+    gameState = 2;
+    cutscene.stop()
+  }
 }
 
 //after cutscene is done playing
