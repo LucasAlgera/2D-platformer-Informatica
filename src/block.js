@@ -6,15 +6,16 @@ class Block{
     this.w = options.w;
     this.h = options.h;
     this.color = options.color;
+    this.vis = options.vis;
     
     this.halfWidth = this.w / 2;
     this.halfHeight = this.h / 2 ;
   }
 
   draw(){
-    fill(this.color)
-    strokeWeight(0);
-    if (this.draw) {
+    if (this.vis){
+      fill(this.color);
+      strokeWeight(0);
       rect(this.x, this.y, this.w, this.h);
     }
   }

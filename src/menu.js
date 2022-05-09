@@ -2,11 +2,11 @@ class BackgroundMenu {
   
   constructor() {
     let menucamera;
-    this.menucameraX = 200;
+    this.menucameraX = 450;
   }
   phase_1(){
     //how long are the background pictures
-      var imageLength = 4000;
+      var imageLength = 2000;
 
     //layer 1 
       translate(0,0,-50);
@@ -59,8 +59,8 @@ class BackgroundMenu {
     this.menucameraX = this.menucameraX +1;
     createcam.setPosition(this.menucameraX, -230,450);
 
-    if(this.menucameraX > 3900){
-      this.menucameraX = 210;
+    if(this.menucameraX > 1400){
+      this.menucameraX = 450;
     }
   }
 }

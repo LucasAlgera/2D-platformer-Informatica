@@ -20,13 +20,12 @@
   var COLLISION;
 
 //blocks in game
-  var ground   = new Block({x:-400,   y:0, w:4000, h:40,   color:[0,255,0], draw:true});
-  var left    = new Block({x:-400,   y:-500, w:5, h:500,   color:[0,255,0], draw:true});
-  var fire     = new Block({x:-35,  y:-50, w:50, h:60,   color:[0,255,0], draw:true});
-  var pl1      = new Block({x:300,  y:-200, w:100, h:20,   color:[0,255,0], draw:true});
-  var pl2     = new Block({x:200,  y:-100, w:100, h:20,   color:[0,255,0], draw:true});
+  var ground   = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:true});
+  var left    = new Block({x:-400,   y:-500, w:5, h:500,color:[0,255,0], vis:true});
+  var pl1      = new Block({x:300,  y:-200, w:100, h:20,color:[0,255,0], vis:true});
+  var pl2     = new Block({x:200,  y:-100, w:100, h:20, color:[0,255,0], vis:true});
 
-  var blocks = [ground, left, fire, pl1, pl2];
+  var blocks = [ground, left, pl1, pl2];
   console.log(blocks)
 
 
