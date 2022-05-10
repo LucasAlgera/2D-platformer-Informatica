@@ -30,6 +30,9 @@ class Background {
       for (var layer_5X = -928/2; layer_5X < imageLength; layer_5X+=layer_5.width) {
         image(layer_5, layer_5X,-height-130);
       }
+      for (var layer_mainX = -928/2; layer_mainX < imageLength; layer_mainX+=layer_main.width) {
+        image(layer_main, layer_mainX,-height-130);
+      }
 
     //layer 3
       translate(0,0,24);
@@ -45,7 +48,9 @@ class Background {
     //layer 4
       translate(0,0,0);
         image(tent,-300,-100,250,110);
-        image(campfire,-35,-40,50,50);
+        image(campfire,-35,-40,50,50);        
+        image(boom,65,-40,80,50);
+      
     //layer 5
       translate(0,0,1);
       for (var layer_1X = -928/2; layer_1X < imageLength; layer_1X+=layer_1.width) {

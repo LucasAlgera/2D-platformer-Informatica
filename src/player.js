@@ -1,10 +1,4 @@
-//let pictures and camera
-  let character_stand_right;
-  let character_stand_left;
-  let character_run_right;
-  let character_run_left;
-  let dead_right;
-  let dead_left;
+//let camera
   let createcam;
 
 //set class variables
@@ -13,17 +7,12 @@
   var velx = 0;
   var jumpPower = -25;
   var num = 0;
+  var active = 0;
 
 class Player{
 
   constructor() {
     createcam = createCamera();
-    character_stand_right = loadImage('data/player/standing_right.gif');
-    character_stand_left = loadImage('data/player/standing_left.gif');
-    character_run_right = loadImage('data/player/running_right.gif');
-    character_run_left = loadImage('data/player/running_left.gif');
-    dead_right = loadImage('data/player/dead_right.png');
-    dead_left = loadImage('data/player/dead_left.png');
     
     this.x = 30;
     this.y = -110;
@@ -135,21 +124,24 @@ class Player{
       //rect(this.x, this.y, this.w, this.h);
       
     //direction the player is facing
-      if (keyIsDown(68)) {
-        direct = 0;
+
+      fall.onended(fallact);
+      function fallact(){
+        active = 0;
+        console.log("end")
       }
-      if (keyIsDown(65)) {
-        direct = 1;
-      }
-  
       
     //different pictures for different actions
-      if (keyIsDown(68) && direct == 0) {
+      if (keyIsDown(68)) {
+        direct = 0;
         image(character_run_right, this.x, this.y, this.w, this.h);
       } else if (keyIsDown(17) && direct == 0) {
         image(dead_right, this.x, this.y, this.w, this.h);
-        
-        fall.play();
+        if (active == 0){
+          console.log("start")
+          fall.play();
+          active = 1;
+        }
       } else{
         if(direct == 0){
           image(character_stand_right, this.x, this.y, this.w, this.h);
@@ -157,10 +149,15 @@ class Player{
       }
   
       if (keyIsDown(65)) {
+        direct = 1;
         image(character_run_left, this.x, this.y, this.w, this.h);
       } else if (keyIsDown(17) && direct == 1) {
         image(dead_left, this.x, this.y, this.w, this.h);
-        
+          if (active == 0){
+            console.log("start")
+            fall.play();
+            active = 1;
+          }
         fall.play();
       } else{
         if(direct == 1){
@@ -169,6 +166,6 @@ class Player{
       }
     }
   camera(){
-    createcam.setPosition(this.x, -190,400);
+    createcam.setPosition(this.x, -190,450);
   }
 }

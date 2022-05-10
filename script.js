@@ -1,4 +1,4 @@
-//set width, height, speed and fallspeed
+ //set width, height, speed and fallspeed
   var [WIDTH, HEIGHT] = [window.innerWidth, 600];
   var [MOVESPEED, FALLSPEED] = [10,2]
 
@@ -20,12 +20,13 @@
   var COLLISION;
 
 //blocks in game
-  var ground   = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:true});
-  var left    = new Block({x:-400,   y:-500, w:5, h:500,color:[0,255,0], vis:true});
-  var pl1      = new Block({x:300,  y:-200, w:100, h:20,color:[0,255,0], vis:true});
-  var pl2     = new Block({x:200,  y:-100, w:100, h:20, color:[0,255,0], vis:true});
+  var ground = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:true, imglink:"tent"});
+  var left = new Block({x:-400,   y:-500, w:5, h:500,color:[0,255,0], vis:true, imglink:"tent"});
+  var pl1 = new Block({x:300,  y:-200, w:100, h:20,color:[0,255,0], vis:true, imglink:"tent"});
+  var pl2 = new Block({x:200,  y:-100, w:100, h:20, color:[0,255,0], vis:true, imglink:"tent"});
+  var pl3 = new Block({x:30,  y:-70, w:70, h:70, color:[0,255,0], vis:true, imglink:"tent"});
 
-  var blocks = [ground, left, pl1, pl2];
+  var blocks = [ground, left, pl1, pl2, pl3];
   console.log(blocks)
 
 

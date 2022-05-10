@@ -1,4 +1,4 @@
-//preloading everything in the pictures
+-//preloading everything in the pictures
   function preload() {
     layer_1 = loadImage('data/background/Layer_0000_9.png');
     layer_2 = loadImage('data/background/Layer_0001_8.png');
@@ -10,13 +10,23 @@
     layer_8 = loadImage('data/background/Layer_0007_Lights.png');
     layer_9 = loadImage('data/background/Layer_0008_3.png');
     layer_10 = loadImage('data/background/Layer_0009_2.png');
+    layer_main = loadImage('data/background/Layer_Main.png');
     title = loadImage('data/random/menu/title.png');
     exit = loadImage('data/random/menu/exit.png');
     play = loadImage('data/random/menu/play.png');
     options = loadImage('data/random/menu/options.png');
     tent = loadImage('data/random/tent.png');
+    ten1 = loadImage('data/random/tent.png');
     campfire = loadImage('data/random/campfire.gif');
+    boom = loadImage('data/random/log.png');
 
     fall = loadSound('data/sound/fall.mp3');
     music = loadSound('data/sound/background.mp3');
+
+    character_stand_right = loadImage('data/player/standing_right.gif');
+    character_stand_left = loadImage('data/player/standing_left.gif');
+    character_run_right = loadImage('data/player/running_right.gif');
+    character_run_left = loadImage('data/player/running_left.gif');
+    dead_right = loadImage('data/player/dead_right.png');
+    dead_left = loadImage('data/player/dead_left.png');
   }
