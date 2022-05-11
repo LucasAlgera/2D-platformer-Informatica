@@ -25,7 +25,7 @@ class Player{
     dead_right = loadImage('data/player/dead_right.png');
     dead_left = loadImage('data/player/dead_left.png');
     
-    this.x = 0;
+    this.x = 8;
     this.y = -110;
     this.w = 70;
     this.h = 70;    
@@ -169,6 +169,6 @@ class Player{
       }
     }
   camera(){
-    createcam.setPosition(this.x, -190,400);
+    createcam.setPosition(this.x, -190,375);
   }
 }

@@ -16,7 +16,7 @@
   var COLLISION;
 
 //blocks in game
-  var ground   = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:true});
+  var ground   = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:false});
   var left    = new Block({x:-400,   y:-500, w:5, h:500,color:[0,255,0], vis:true});
   var pl1      = new Block({x:300,  y:-200, w:100, h:20,color:[0,255,0], vis:true});
   var pl2     = new Block({x:200,  y:-100, w:100, h:20, color:[0,255,0], vis:true});
@@ -35,7 +35,7 @@ function setup() {
 
   
   //cutscene
-    cutscene = createVideo(['data/video/cutscene.mov']);
+    cutscene = createVideo(['data/video/cutscene.mp4']);
     cutscene.hide(); //puts video inside of the canvas
     cutscene.onended(cutDone); //check when cutscene is done playing
 
@@ -67,7 +67,7 @@ function game_phase0(){
     }
 }
 function game_phase1 (){
-  image(cutscene, 100, -600,1000,600);
+  image(cutscene, -85, -550,WIDTH,HEIGHT);
   if(keyIsDown(32)){
     gameState = 2;
     cutscene.stop()
