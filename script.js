@@ -54,6 +54,24 @@ function draw(){
     if(gameState == 2){
       game_phase2();
     }
+    if(gameState == 3){
+      game_phase3();
+    }
+    if(gameState == 4){
+      game_phase4();
+    }
+    if(gameState == 5){
+      game_phase5();
+    }
+    if(gameState == 6){
+      game_phase6();
+    }
+    if(gameState == 7){
+      game_phase7();
+    }
+    if(gameState == 8){
+      game_phase8();
+    }
   }
 
 //gameStates
@@ -91,6 +109,30 @@ function game_phase2 (){
     player.draw();
     player.move();
     player.camera();
+}
+function game_phase3 (){
+  GameBackground.phase_1();
+
+}
+function game_phase4 (){
+  GameBackground.phase_1();
+
+}
+function game_phase5 (){
+  GameBackground.phase_1();
+
+}
+function game_phase6 (){
+  GameBackground.phase_1();
+
+}
+function game_phase7 (){
+  GameBackground.phase_1();
+
+}
+function game_phase8 (){
+  GameBackground.phase_1();
+
 }
 
 
