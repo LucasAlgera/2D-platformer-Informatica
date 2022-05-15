@@ -1,9 +1,4 @@
  //call other files
-  var player;
-  var GameBackground;
-  var MenuBackground;
-  var fall;
-  var music;
   var camerax;
   var bcolliding;
   var enemyColliding;
@@ -11,141 +6,118 @@
 var Names = {};
 Names.Ground = 0
 Names.Spike = 2
+Names.Snail = 3
 
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
   var gameState = 0;
-  let cutscene
-
-//framerate
-  let fr = 60;
 
 //collision
-  var COLLISION;
   ground = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:false ,name:0});
   lwall = new Block({x:-310,   y:-HEIGHT, w:10, h:HEIGHT,color:[0,255,0], vis:false ,name:0});
   p1 = new Block({x:600,   y:-100, w:50, h:100,color:[0,255,0], vis:true ,name:0});
   p2 = new Block({x:450,   y:-100, w:50, h:100,color:[0,255,0], vis:true ,name:0});
   spike = new Block({x:500,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike});
 
-  var blocks = [ground, lwall, spike, p1, p2];
+  blocks = [ground, lwall, spike, p1, p2];
+   console.log(blocks)
 
-  snail = new Enemy({x:100,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:2, move:true, moveTo1:100, moveTo2:450});
+  snail = new Enemy({x:100,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:Names.Snail, move:true, moveTo1:100, moveTo2:450});
+  snail2 = new Enemy({x:700,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:650, moveTo2:900});
 
-  var enemies = [snail];
-  console.log(blocks)
+  enemies = [snail, snail2];
+  console.log(enemies)
 
 
 function setup() {
-  createCanvas(WIDTH, HEIGHT,WEBGL);
-  frameRate(fr) 
+  //settings
+    createCanvas(WIDTH, HEIGHT,WEBGL);
+    frameRate(60) 
 
-  player = new Player();
-  MenuBackground = new BackgroundMenu();
-  GameBackground = new Background();
+  //variables
+    createcam = createCamera();
+    player = new Player();
+    MenuBackground = new BackgroundMenu();
+    GameBackground = new Background();
 
   
   //cutscene
     cutscene = createVideo(['data/video/cutscene.mp4']);
     cutscene.hide(); //puts video inside of the canvas
-    cutscene.onended(cutDone); //check when cutscene is done playing
-
+    cutscene.onended(pstate); //check when cutscene is done playing
 }
 
 function draw(){  
   background(0);
 
   //gameStates
-    if(gameState == 0){
-      game_phase0();
-    }
-    if(gameState == 1){
-      game_phase1();
-    }
-    if(gameState == 2){
-      game_phase2();
-    }
-    if(gameState == 3){
-      game_phase3();
-    }
-    if(gameState == 4){
-      game_phase4();
-    }
-    if(gameState == 5){
-      game_phase5();
-    }
-    if(gameState == 6){
-      game_phase6();
-    }
-    if(gameState == 7){
-      game_phase7();
-    }
-    if(gameState == 8){
-      game_phase8();
-    }
-  }
+  if(gameState == 0){
+      
+      MenuBackground.phase_1();  
+      MenuBackground.camera();
+      if (keyIsDown(13)){
+        gameState = 1;
+        playerAlive = 0;
+        music.loop();
+        cutscene.play()
+      }
+      
+  } else if(gameState == 1){
 
-//gameStates
-function game_phase0(){
-  MenuBackground.phase_1();  
-  MenuBackground.camera();
-    if (keyIsDown(13)){
-      gameState = 1;
-      playerAlive = 0;
-      music.loop();
-      cutscene.play()
-    }
-}
-function game_phase1 (){
-  image(cutscene, camerax-W/2, -550,W,H);
-  if(keyIsDown(32)){
-    gameState = 2;
-    cutscene.stop()
+      image(cutscene, camerax-W/2, -550,W,H);
+      if(keyIsDown(32)){
+        gameState = 2;
+        cutscene.stop()
+      }
+      
+      } if(gameState == 2){
+      
+      //background
+      COLLISION = checkCollision();
+      DAMAGE = checkDamage();
+      GameBackground.phase_1();
+      blocks.forEach(b => b.draw());
+      enemies.forEach(b => b.draw());
+
+      //sign
+      image(sign_1, 30,-50, 50,50);
+      //player
+      player.draw();
+      player.move();
+      player.camera();
+
+       
+  } else if(gameState == 3){
+      
+      GameBackground.phase_1();
+      
+  } else if(gameState == 4){
+      
+      GameBackground.phase_1();
+      
+  } else if(gameState == 5){
+      
+      GameBackground.phase_1();
+
+  } else if(gameState == 6){
+  
+      GameBackground.phase_1();
+
+  } else if(gameState == 7){
+      
+      GameBackground.phase_1();
+
+  } else if(gameState == 8){
+      
+      GameBackground.phase_1();
+
   }
 }
+
 
 //after cutscene is done playing
-function cutDone() {
+function pstate() {
   gameState++;
-}
-
-function game_phase2 (){
- //background
-  COLLISION = checkCollision();
-  GameBackground.phase_1();
-  blocks.forEach(b => b.draw());
-  enemies.forEach(b => b.draw());
-
-  //sign
-  image(sign_1, 30,-50, 50,50);
-  //player
-    player.draw();
-    player.move();
-    player.camera();
-}
-function game_phase3 (){
-  GameBackground.phase_1();
-
-}
-function game_phase4 (){
-  GameBackground.phase_1();
-
-}
-function game_phase5 (){
-  GameBackground.phase_1();
-
-}
-function game_phase6 (){
-  GameBackground.phase_1();
-
-}
-function game_phase7 (){
-  GameBackground.phase_1();
-
-}
-function game_phase8 (){
-  GameBackground.phase_1();
-  
 }
 
 
@@ -202,7 +174,13 @@ function checkCollision(){
     }
 
   });
-  
+
+  return colliding;
+}
+
+function checkDamage(){   
+
+  colliding = false;
 
   //ENEMY COLLISION
   enemies.forEach(function(enemy) {

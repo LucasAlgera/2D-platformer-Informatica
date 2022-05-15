@@ -1,6 +1,6 @@
 class Background {
+  
   constructor() {
-    
   }
   
   phase_1(){

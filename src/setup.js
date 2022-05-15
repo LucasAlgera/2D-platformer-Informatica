@@ -1,10 +1,10 @@
 //Important variables:
-  var [WIDTH, HEIGHT] = [1200, 600];
-  var [W, H] = [1200, 600];
-  var [MOVESPEED, FALLSPEED] = [10,2]
+  var [WIDTH, W, HEIGHT, H] = [1200, 1200, 600, 600];
+  var [MOVESPEED, FALLSPEED, JUMPPOWER] = [10,2,-25]
   var playerAlive = 0;
-//preloading everything in the pictures:
+//preloading everything:
   function preload() {
+  //Menu
     title = loadImage('data/random/menu/title.png');
     exit = loadImage('data/random/menu/exit.png');
     play = loadImage('data/random/menu/play.png');
@@ -40,6 +40,21 @@
     sign_9 = loadImage('data/random/signs/9-sign.png');
     sign_10 = loadImage('data/random/signs/10-sign.png');
     sign_12 = loadImage('data/random/signs/11-sign.png');
+
+  //Music
     fall = loadSound('data/sound/fall.mp3');
     music = loadSound('data/sound/background.mp3');
+
+  //video
+    //cutscene = createVideo(['data/video/cutscene.mp4']);
+
+  //Player
+    character_stand_right = loadImage('data/player/standing_right.gif');
+    character_stand_left = loadImage('data/player/standing_left.gif');
+    character_run_right = loadImage('data/player/running_right.gif');
+    character_run_left = loadImage('data/player/running_left.gif');
+    dead_right = loadImage('data/player/dead_right.png');
+    dead_left = loadImage('data/player/dead_left.png');
+
+  //Extra
   }

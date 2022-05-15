@@ -1,7 +1,6 @@
 class BackgroundMenu {
   
   constructor() {
-    let menucamera;
     this.menucameraX = 450;
   }
   phase_1(){

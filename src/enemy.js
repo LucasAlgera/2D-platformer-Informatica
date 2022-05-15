@@ -23,8 +23,8 @@ class Enemy{
       strokeWeight(0);
       rect(this.x, this.y, this.w, this.h);
     }
-    if(this.name == Names.Spike){
-      if(enemyColliding == "2" && (COLLISION == "bottom" || COLLISION == "top" || COLLISION == "right" || COLLISION == "left")){
+    if(this.name == Names.Snail){
+      if(enemyColliding == "3" && (DAMAGE == "bottom" || DAMAGE == "top" || DAMAGE == "right" || DAMAGE == "left")){
         playerAlive = 1;
       }
     }
