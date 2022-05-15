@@ -1,7 +1,8 @@
 //Important variables:
   var [WIDTH, HEIGHT] = [1200, 600];
+  var [W, H] = [1200, 600];
   var [MOVESPEED, FALLSPEED] = [10,2]
-
+  var playerAlive = 0;
 //preloading everything in the pictures:
   function preload() {
     title = loadImage('data/random/menu/title.png');
@@ -10,6 +11,10 @@
     options = loadImage('data/random/menu/options.png');
     tent = loadImage('data/random/tent.png');
     campfire = loadImage('data/random/campfire.gif');
+    spikes = loadImage('data/random/3-spikes.png');
+    deathscreen = loadImage('data/random/menu/deadscreen.png');
+    snail_right = loadImage('data/random/snail/snail-right.png');
+    snail_left = loadImage('data/random/snail/snail-left.png');
 
   //Forest layers
     layer_1 = loadImage('data/background/Layer_0000_9.png');

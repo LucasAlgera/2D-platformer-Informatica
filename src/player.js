@@ -6,6 +6,7 @@
   let dead_right;
   let dead_left;
   let createcam;
+  let deathTimer = 5;
 
 //set class variables
   var direct = 0;
@@ -14,9 +15,10 @@
   var jumpPower = -25;
   var num = 0;
 
+
 class Player{
 
-  constructor() {
+  constructor(options) {
     createcam = createCamera();
     character_stand_right = loadImage('data/player/standing_right.gif');
     character_stand_left = loadImage('data/player/standing_left.gif');
@@ -29,7 +31,6 @@ class Player{
     this.y = -110;
     this.w = 70;
     this.h = 70;    
-    
 
     // for easy readable calculation
     this.halfWidth = this.w / 2;
@@ -133,6 +134,14 @@ class Player{
   //draw player
     draw(){
       //rect(this.x, this.y, this.w, this.h);
+      if(playerAlive == 1){
+          fall.play();
+          deathTimer = 5;
+          gameState = 0;
+          playerAlive = 0;
+          player.x = 8;      
+          player.y = -110;
+      }
       
     //direction the player is facing
       if (keyIsDown(68)) {

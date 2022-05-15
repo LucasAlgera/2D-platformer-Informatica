@@ -44,11 +44,15 @@ class BackgroundMenu {
       image(exit, this.menucameraX-120,-120, 225, 65);
   }
   camera(){
+    camerax = this.menucameraX;
     this.menucameraX = this.menucameraX +1;
     createcam.setPosition(this.menucameraX, -230,450);
 
     if(this.menucameraX > 1400){
       this.menucameraX = 450;
+    }
+    if(gameState ==1){
+      this.menucameraX = 0;
     }
   }
 }

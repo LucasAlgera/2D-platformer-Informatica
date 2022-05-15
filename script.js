@@ -1,9 +1,17 @@
-//call other files
+ //call other files
   var player;
   var GameBackground;
   var MenuBackground;
   var fall;
   var music;
+  var camerax;
+  var bcolliding;
+  var enemyColliding;
+
+var Names = {};
+Names.Ground = 0
+Names.Spike = 2
+
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
   var gameState = 0;
@@ -14,20 +22,23 @@
 
 //collision
   var COLLISION;
+  ground = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:false ,name:0});
+  lwall = new Block({x:-310,   y:-HEIGHT, w:10, h:HEIGHT,color:[0,255,0], vis:false ,name:0});
+  p1 = new Block({x:600,   y:-100, w:50, h:100,color:[0,255,0], vis:true ,name:0});
+  p2 = new Block({x:450,   y:-100, w:50, h:100,color:[0,255,0], vis:true ,name:0});
+  spike = new Block({x:500,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike});
 
-//blocks in game
-  var ground   = new Block({x:-400,   y:0, w:4000, h:40,color:[0,255,0], vis:false});
-  var left    = new Block({x:-400,   y:-500, w:5, h:500,color:[0,255,0], vis:true});
-  var pl1      = new Block({x:300,  y:-200, w:100, h:20,color:[0,255,0], vis:true});
-  var pl2     = new Block({x:200,  y:-100, w:100, h:20, color:[0,255,0], vis:true});
+  var blocks = [ground, lwall, spike, p1, p2];
 
-  var blocks = [ground, left, pl1, pl2];
+  snail = new Enemy({x:100,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:2, move:true, moveTo1:100, moveTo2:450});
+
+  var enemies = [snail];
   console.log(blocks)
 
 
 function setup() {
   createCanvas(WIDTH, HEIGHT,WEBGL);
-  frameRate(fr)
+  frameRate(fr) 
 
   player = new Player();
   MenuBackground = new BackgroundMenu();
@@ -80,12 +91,13 @@ function game_phase0(){
   MenuBackground.camera();
     if (keyIsDown(13)){
       gameState = 1;
+      playerAlive = 0;
       music.loop();
       cutscene.play()
     }
 }
 function game_phase1 (){
-  image(cutscene, -85, -550,WIDTH,HEIGHT);
+  image(cutscene, camerax-W/2, -550,W,H);
   if(keyIsDown(32)){
     gameState = 2;
     cutscene.stop()
@@ -99,9 +111,10 @@ function cutDone() {
 
 function game_phase2 (){
  //background
-  blocks.forEach(b => b.draw());
   COLLISION = checkCollision();
   GameBackground.phase_1();
+  blocks.forEach(b => b.draw());
+  enemies.forEach(b => b.draw());
 
   //sign
   image(sign_1, 30,-50, 50,50);
@@ -132,11 +145,10 @@ function game_phase7 (){
 }
 function game_phase8 (){
   GameBackground.phase_1();
-
+  
 }
 
 
-//COLLISION CHECK
 function checkCollision(){   
 
   colliding = false;
@@ -165,24 +177,78 @@ function checkCollision(){
           if(dy > 0) {
             player.y += overlapY;
             colliding = "top";
+            bcolliding = block.name; 
           }
           else {            
             player.y -= overlapY;
-            colliding = "bottom";            
+            colliding = "bottom";
+            bcolliding = block.name; 
           }
         }
         else{
           if(dx > 0){ 
             player.x += overlapX; 
             colliding = "left";
+            bcolliding = block.name; 
           }
           else {
             player.x -= overlapX;
             colliding = "right";
+            bcolliding = block.name; 
           }
         }
 
-        // showDebug({ overlapX:overlapX, overlapY:overlapY, dx:dx, dy:dy, colliding:colliding});
+      }
+    }
+
+  });
+  
+
+  //ENEMY COLLISION
+  enemies.forEach(function(enemy) {
+    
+    // calculate difference from x and y axis centres
+    let ex = (player.x + player.halfWidth) - (enemy.x + enemy.halfWidth);
+    let ey = (player.y + player.halfHeight) - (enemy.y + enemy.halfHeight);
+
+    let combinedHalfWidthsEnemy  = player.halfWidth + enemy.halfWidth;
+    let combinedHalfHeightsEnemy = player.halfHeight + enemy.halfHeight;
+
+    // x-axis collision?
+    if(Math.abs(ex) < combinedHalfWidthsEnemy){
+      
+      // y-axis collision?
+      if(Math.abs(ey) < combinedHalfHeightsEnemy){          
+
+        let overlapXEnemy = combinedHalfWidthsEnemy - Math.abs(ex);
+        let overlapYEnemy = combinedHalfHeightsEnemy - Math.abs(ey);          
+
+        // collision is on the smallest overlap
+        if(overlapXEnemy >= overlapYEnemy){
+          if(ey > 0) {
+            player.y += overlapYEnemy;
+            colliding = "top";
+            enemyColliding = enemy.name; 
+          }
+          else {            
+            player.y -= overlapYEnemy;
+            colliding = "bottom";
+            enemyColliding = enemy.name; 
+          }
+        }
+        else{
+          if(ex > 0){ 
+            player.x += overlapXEnemy; 
+            colliding = "left";
+            enemyColliding = enemy.name; 
+          }
+          else {
+            player.x -= overlapXEnemy;
+            colliding = "right";
+            enemyColliding = enemy.name; 
+          }
+        }
+
       }
     }
 
@@ -190,15 +256,4 @@ function checkCollision(){
 
   return colliding;
 }
-
-//show collision in console
-function showDebug(options){
-  fill(0)
-  console.log("overlapX: " + options.overlapX,10,20)
-  console.log("dx: " + options.dx,100,20)
-  console.log("overlapY: "   + options.overlapY,10,40)        
-  console.log("dy: " + options.dy,100,40)
-  console.log("colliding: " + options.colliding,10,60)
-}
-
                                               
