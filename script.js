@@ -7,6 +7,7 @@ var Names = {};
 Names.Ground = 0
 Names.Spike = 2
 Names.Snail = 3
+Names.Frog = 4
 
 
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
