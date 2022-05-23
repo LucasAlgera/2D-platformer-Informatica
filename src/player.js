@@ -7,6 +7,7 @@ class Player{
 
   constructor(options) {
 
+    this.xm = 8;
     this.x = 8;
     this.y = -110;
     this.w = 70;
@@ -20,9 +21,6 @@ class Player{
 
 //Player movement (player.move)
   move(){
-
-    // start with gravity
-    this.gravity();
   
     if (keyIsDown(65) && !keyIsDown(68)){
       if(COLLISION != "left"){//&& this.x >= 0)
@@ -61,16 +59,16 @@ class Player{
     this.x += velx;
 
     // spatie
-      if(COLLISION == "bottom"){
-        vely = 0;
-      } else{
-        vely += FALLSPEED;
-      }
-      if (keyIsDown(32) && COLLISION == "bottom") {
-        vely += JUMPPOWER;
-      }
+    if(COLLISION == "bottom"){
+      vely = 0;
+    } else{
+      vely += FALLSPEED;
+    }
+    if (keyIsDown(32) && COLLISION == "bottom") {
+       vely += JUMPPOWER;
+    }
      
-      this.y += vely;
+    this.y += vely;
   
     // if (keyIsDown(UP_ARROW)) {
     //   if(COLLISION != "top")
@@ -81,46 +79,15 @@ class Player{
     //   if(COLLISION != "bottom")
     //     this.y += MOVESPEED;              
     // }
-
-
-    // EXTRA
-      // backspace
-      if (keyIsDown(8)) {
-        console.log(this)
-      }
-
-      if(player.y > (ground.y)){
-        //damage(100);
-        console.log("map")
-      }
-
-      // esc
-      if (keyIsDown(27)) {
-         noLoop();
-      }
-    
-  }
-  
-  gravity(){
   }
   
 //Drawing the player (player.draw)
   draw(){
       
     //rect(this.x, this.y, this.w, this.h);
-    if(playerAlive == 1){
-      fall.play();
-      music.stop();
-      deathTimer = 5;
-      gameState = 0;
-      playerAlive = 0;
-      player.x = 8;      
-      player.y = -110;
-    }
-  
       
     //different pictures for different actions
-    if (keyIsDown(68)) {
+    if (keyIsDown(68) && !keyIsDown(65)) {
       direct = 0;
       image(character_run_right, this.x, this.y, this.w, this.h);
     } else if (keyIsDown(17) && direct == 0) {
@@ -132,7 +99,7 @@ class Player{
       }
     }
   
-    if (keyIsDown(65)) {
+    if (keyIsDown(65) && !keyIsDown(68)) {
       direct = 1;
       image(character_run_left, this.x, this.y, this.w, this.h);
     } else if (keyIsDown(17) && direct == 1) {
@@ -148,9 +115,42 @@ class Player{
   
 //Camera position (player.camera)
   camera(){
-    
-    createcam.setPosition(this.x, -190,375);
-    
+    camerax = this.x;
+    if (this.x < this.xm) {
+      createcam.setPosition(this.xm, -190,375);
+    } else {
+      createcam.setPosition(this.x, -190,375);
+    }
   }
-  
+
+  dead(){
+    //Player
+    if (direct == 0){
+      image(dead_right, this.x, this.y, this.w, this.h);
+    } else if (direct == 1){
+      image(dead_left, this.x, this.y, this.w, this.h);
+    }
+    //Deadscreen
+    image(deathscreen, camerax - W/2,-H + 130, W ,H);
+    //Respawn or Title screen
+  }
+}
+
+if (alive){
+  function keyPressed() {
+    if (keyCode === 65) {
+      walking.loop();
+    }
+    if(keyCode === 68) {
+      walking.loop();
+    }
+  }
+  function keyReleased() {
+    if (keyCode === 65) {
+      walking.stop();
+    }
+    if(keyCode === 68) {
+      walking.stop();
+    }
+  }
 }

@@ -1,7 +1,7 @@
 //Important variables:
   var [WIDTH, W, HEIGHT, H] = [1200, 1200, 600, 600];
   var [MOVESPEED, FALLSPEED, JUMPPOWER] = [10,2,-25]
-  var playerAlive = 0;
+  var alive = true;
 //preloading everything:
   function preload() {
   //Menu
@@ -15,7 +15,11 @@
     deathscreen = loadImage('data/random/menu/deadscreen.png');
     snail_right = loadImage('data/random/snail/snail-right.png');
     snail_left = loadImage('data/random/snail/snail-left.png');
-
+    frog_stand = loadImage('data/random/snail/frog-stand.png');
+    frog_jump = loadImage('data/random/snail/frog-jump.gif');
+    tree = loadImage('data/map/trunk.png');
+    exitscreen = loadImage('data/random/menu/exitscreen.png');
+      
   //Forest layers
     layer_1 = loadImage('data/background/Layer_0000_9.png');
     layer_2 = loadImage('data/background/Layer_0001_8.png');
@@ -43,8 +47,10 @@
 
   //Music
     fall = loadSound('data/sound/fall.mp3');
-    music = loadSound('data/sound/background.mp3');
-
+    crickets = loadSound('data/sound/background.mp3');
+    music = loadSound('data/sound/music.mp3');
+    walking = loadSound('data/sound/running-in-grass.mp3')
+    hey = loadSound('data/sound/hey.mp3')
   //video
     //cutscene = createVideo(['data/video/cutscene.mp4']);
 
