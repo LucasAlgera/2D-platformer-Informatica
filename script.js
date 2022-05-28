@@ -6,14 +6,15 @@ var enemyColliding;
 var Names = {};
 Names.Ground = 0;
 Names.Platform = 1;
+Names.IslandShort = 5;
+Names.IslandLong = 6;
 Names.Spike = 2;
 Names.Snail = 3;
 Names.Frog = 4;
 
-
-
 //0.1/2/3 = menu, 1.1/2/3 = cutscene, 2.1/2/3 = level nr.1, etc.
   var gameState = 0;
+//  let currentLevel;
 
 //collision
 //Gamestate 2
@@ -26,44 +27,71 @@ Names.Frog = 4;
   snail1_lvl2 = new Enemy({x:700,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:650, moveTo2:900, lvl:2});
   snail2_lvl2 = new Enemy({x:1000,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:950, moveTo2:1500, lvl:2});
   snail3_lvl2 = new Enemy({x:1400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:950, moveTo2:1500, lvl:2});
-  frog_lvl2 = new Enemy({x:300,   y:-50, w:50, h:50,color:[0,255,0], vis:false ,name:3, move:false,jumpTo:-300, jumpFrom:-50, lvl:2});
 
 
 //Gamestate 3 
   spike1_lvl3 = new Block({x:200,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
   p1_lvl3 = new Block({x:300,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
   spike2_lvl3 = new Block({x:350,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  frog1_lvl3 = new Enemy({x:600,   y:-50, w:50, h:50,color:[0,255,0], vis:false ,name:3, move:false,frog:true, jumpTo:-300, jumpFrom:-50, lvl:3});
   p2_lvl3 = new Block({x:700,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
-  p3_lvl3 = new Block({x:950,   y:-200, w:200, h:50,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
-  p4_lvl3 = new Block({x:1400,   y:-200, w:200, h:50,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
+  p3_lvl3 = new Block({x:950,   y:-200, w:200, h:50,color:[0,255,0], vis:false ,name:Names.IslandShort, lvl:3});
+  p4_lvl3 = new Block({x:1400,   y:-200, w:200, h:50,color:[0,255,0], vis:false ,name:Names.IslandShort, lvl:3});
+  spike3_lvl3 = new Block({x:900,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike4_lvl3 = new Block({x:1000,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike5_lvl3 = new Block({x:1100,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike6_lvl3 = new Block({x:1200,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike7_lvl3 = new Block({x:1300,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike8_lvl3 = new Block({x:1400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike9_lvl3 = new Block({x:1500,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+  spike10_lvl3 = new Block({x:1600,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:3});
+
   snail1_lvl3 = new Enemy({x:1650,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:1700, moveTo2:2000, lvl:3});
   p5_lvl3 = new Block({x:2100,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
+  frog2_lvl3 = new Enemy({x:2175,   y:-50, w:50, h:50,color:[0,255,0], vis:false ,name:3, move:false,frog:true, jumpTo:-300, jumpFrom:-50, lvl:3});
   p6_lvl3 = new Block({x:2250,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:3});
 
 
 //Gamestate 4
   p1_lvl4 = new Block({x:200,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:4});
   p2_lvl4 = new Block({x:400,   y:-200, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:4});
-  p3_lvl4 = new Block({x:600,   y:-250, w:600, h:50,color:[0,255,0], vis:false ,name:Names.Platform, lvl:4});
+  p3_lvl4 = new Block({x:600,   y:-250, w:600, h:50,color:[0,255,0], vis:false ,name:Names.IslandLong, lvl:4});
   snail1_lvl4 = new Enemy({x:800,   y:-300, w:100, h:50,color:[0,255,0], vis:false ,name:3, move:true, moveTo1:600, moveTo2:1000, lvl:4});
+  frog1_lvl4 = new Enemy({x:1100,   y:-300, w:50, h:50,color:[0,255,0], vis:false ,name:3, move:false,frog:true, jumpTo:-550, jumpFrom:-300, lvl:4});
   p4_lvl4 = new Block({x:1350,   y:-200, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:4});
   p5_lvl4 = new Block({x:1550,   y:-100, w:50, h:100,color:[0,255,0], vis:false ,name:Names.Platform, lvl:4});
+  spike1_lvl4 = new Block({x:300,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike2_lvl4 = new Block({x:400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike3_lvl4 = new Block({x:500,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike4_lvl4 = new Block({x:600,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike5_lvl4 = new Block({x:700,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike6_lvl4 = new Block({x:800,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike7_lvl4 = new Block({x:900,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike8_lvl4 = new Block({x:1000,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike9_lvl4 = new Block({x:1100,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike10_lvl4 = new Block({x:1200,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike11_lvl4 = new Block({x:1300,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+  spike12_lvl4 = new Block({x:1400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
+
+
+  boss = new Enemy({x:500,   y:-300, w:300, h:300,color:[0,255,0], vis:false ,name:3,jumpTo:-550, jumpFrom:-300, lvl:5, boss:true, move:false,frog:true,  frog:false});
 
 //Object Arrays
   blocks = [ground, lwall, p1_lvl2, p2_lvl2, p3_lvl2, spike_lvl2, //<---Level1
-           spike1_lvl3, p1_lvl3, spike2_lvl3, p2_lvl3, p3_lvl3, p4_lvl3, p5_lvl3, p6_lvl3, //<---Level2
-           p1_lvl4, p2_lvl4,p3_lvl4, p4_lvl4, p5_lvl4 //<---Level3
+           spike1_lvl3, p1_lvl3, spike2_lvl3, p2_lvl3, p3_lvl3, p4_lvl3,spike3_lvl3, spike4_lvl3, spike5_lvl3, spike6_lvl3, spike7_lvl3, spike8_lvl3, spike9_lvl3,spike10_lvl3, p5_lvl3, p6_lvl3, //<---Level2
+           p1_lvl4, p2_lvl4,p3_lvl4, p4_lvl4, p5_lvl4, p4_lvl3, spike1_lvl4, spike2_lvl4, spike3_lvl4, spike4_lvl4, spike5_lvl4, spike6_lvl4, spike7_lvl4, spike8_lvl4, spike9_lvl4,spike10_lvl4, spike11_lvl4, spike12_lvl4 //<---Level3
            ];
   console.log(blocks)
-  enemies = [snail1_lvl2, snail2_lvl2, snail3_lvl2,frog_lvl2, //<---Level1
-            snail1_lvl3, //<---Level2
-            snail1_lvl4 //<---Level3
+  enemies = [snail1_lvl2, snail2_lvl2, snail3_lvl2, //<---Level1
+            frog1_lvl3, snail1_lvl3, frog2_lvl3, //<---Level2
+            snail1_lvl4, frog1_lvl4 //<---Level3
+             ,boss
             ];
   console.log(enemies)
 function setup() {
   //settings
     createCanvas(WIDTH, HEIGHT,WEBGL);
-    frameRate(60) 
+    frameRate(60);
 
   //variables
     createcam = createCamera();
@@ -75,7 +103,8 @@ function setup() {
   //cutscene
     cutscene = createVideo(['data/video/cutscene.mp4']);
     cutscene.hide(); //puts video inside of the canvas
-    cutscene.onended(pstate); //check when cutscene is done playing
+
+  //local storage for levels
 }
 
 
@@ -100,6 +129,8 @@ function draw(){
         gameState = 2;
         cutscene.stop()
       }
+    cutscene.onended(pstate); //check when cutscene is done playing
+
       
   } else if(gameState == 2){ //GAME STATE 2
       //background
@@ -107,6 +138,7 @@ function draw(){
     
       //sign
       image(sign_1, 30,-50, 50,50);
+      image(sign_go, 1650,-50, 50,50);
       if (crickets.isPlaying()){
         crickets.stop();
         music.setVolume(0.4);
@@ -120,10 +152,12 @@ function draw(){
       } else{
         player.dead();
       }
+      currentLevel = 2
+      storeItem('currentLevel', currentLevel);
 
     if(keyIsDown(82) || player.x > 1650){
       gameState = 3;
-      player.x = 8;
+      player.x = -200;
     }
 
        
@@ -133,6 +167,7 @@ function draw(){
     
       //sign
       image(sign_2, 30,-50, 50,50);
+      image(sign_go, 2500,-50, 50,50);
 
       //player
       if (alive){
@@ -142,9 +177,13 @@ function draw(){
       } else{
         player.dead();
       }
-      if(keyIsDown(82) || player.x > 1650){
+    
+      currentLevel = 3;
+      storeItem('currentLevel', currentLevel);
+    
+      if(keyIsDown(82) || player.x > 2500){
       gameState = 4;
-      player.x = 8;
+      player.x = -200;
     }
   } else if(gameState == 4){
       //background
@@ -152,6 +191,7 @@ function draw(){
     
       //sign
       image(sign_3, 30,-50, 50,50);
+      image(sign_go, 2000,-50, 50,50);
 
       //player
       if (alive){
@@ -161,7 +201,31 @@ function draw(){
       } else{
         player.dead();
       }
-  
+      currentLevel = 4;
+      storeItem('currentLevel', currentLevel);
+    
+      if(keyIsDown(82) || player.x > 2000){
+      gameState = 5;
+      player.x = -200;
+    }
+  } else if(gameState == 5){
+      //background
+      visual();
+    
+      //sign
+      image(sign_4, 30,-50, 50,50);
+      image(sign_go, 2000,-50, 50,50);
+
+      //player
+      if (alive){
+        player.draw();
+        player.move();
+        player.camera();
+      } else{
+        player.dead();
+      }
+      currentLevel = 5;
+      storeItem('currentLevel', currentLevel);
   }
 }
 
@@ -175,7 +239,20 @@ function mouseClicked() {
       if (mouseY > 320 && mouseY < 370) {
         crickets.loop();
         cutscene.play();
-        gameState = 1;
+
+
+
+        if (typeof(getItem('currentLevel')) == "undefined") {
+          currentLevel = 1;
+        } else {
+          currentLevel = getItem('currentLevel'); 
+        }
+        storeItem('currentLevel', currentLevel);
+        currentLevel = getItem('currentLevel');
+        if (currentLevel === null) {
+           currentLevel = 1;
+        }
+        gameState = currentLevel;
       }
       if (mouseY > 380 && mouseY < 430) {
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t";
@@ -195,7 +272,7 @@ function mouseClicked() {
         player.x = 8;      
         player.y = -110;
         alive = true;
-        gameState = 2;
+        gameState = currentLevel;
       } else if (mouseY > 440 && mouseY < 515) {
         player.x = 8;      
         player.y = -110;
@@ -216,7 +293,7 @@ function die() {
 
 //after cutscene is done playing
 function pstate() {
-  gameState++;
+  gameState = 2;
 }
 
 function visual() {

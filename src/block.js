@@ -19,6 +19,12 @@ class Block{
       if(this.name == Names.Platform){
         image(tree, this.x-15, this.y-5, this.w+30, this.h+30);
       }
+      if(this.name == Names.IslandShort){
+        image(short_island, this.x, this.y-5, this.w, this.h);
+      }
+      if(this.name == Names.IslandLong){
+        image(long_island, this.x, this.y-5, this.w, this.h);
+      }
 
       if (this.vis){
         fill(this.color);

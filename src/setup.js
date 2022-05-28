@@ -18,7 +18,13 @@
     frog_stand = loadImage('data/random/snail/frog-stand.png');
     frog_jump = loadImage('data/random/snail/frog-jump.gif');
     tree = loadImage('data/map/trunk.png');
+    short_island = loadImage('data/map/short_island.png');
+    long_island = loadImage('data/map/long_island.png');
     exitscreen = loadImage('data/random/menu/exitscreen.png');
+    boss_jump = loadImage('data/random/boss/boss-jump.png');
+    boss_stand = loadImage('data/random/boss/boss-stand.png');
+    boss_pre_jump = loadImage('data/random/boss/boss-pre-jump.gif');
+    
       
   //Forest layers
     layer_1 = loadImage('data/background/Layer_0000_9.png');
@@ -44,6 +50,7 @@
     sign_9 = loadImage('data/random/signs/9-sign.png');
     sign_10 = loadImage('data/random/signs/10-sign.png');
     sign_12 = loadImage('data/random/signs/11-sign.png');
+    sign_go = loadImage('data/random/signs/go-sign.png');
 
   //Music
     fall = loadSound('data/sound/fall.mp3');

@@ -1,6 +1,3 @@
-  let vely = 0;
-  let velx = 0;
-
 class Enemy{
   constructor(options){
     this.x = options.x;
@@ -19,6 +16,10 @@ class Enemy{
     this.frogTimer = 3;
     this.jumpTo = options.jumpTo;
     this.jumpFrom = options.jumpFrom;
+    this.bossTimer = 6;
+    this.boss = options.boss;
+    this.frog = options.frog;
+    this.bossDirect = 0;
     
     this.halfWidth = this.w / 2;
     this.halfHeight = this.h / 2 ;
@@ -55,26 +56,81 @@ class Enemy{
 
     //FROG
       if(!this.move && alive){
-        if (frameCount % 60 == 0 && this.frogTimer > 0) {
-          this.frogTimer --;
+        if(this.frog){
+          if (frameCount % 60 == 0 && this.frogTimer > 0) {
+            this.frogTimer --;
+          }
+  
+          if(this.frogTimer <= 1){
+            image(frog_jump, this.x, this.y, this.w, this.h);
+          }else{
+            image(frog_stand, this.x, this.y, this.w, this.h);
+          }
+  
+          if (this.jumpFrom <= this.y){
+            this.vely = 0;
+            this.y = this.jumpFrom;
+          } else {
+            this.vely += FALLSPEED;
+          }
+  
+          if(this.frogTimer == 0){
+            this.vely += JUMPPOWER*1.2;
+            this.frogTimer = 2;
+          } 
+          
+          this.y += this.vely;
         }
 
-        this.y += this.vely;
-        this.vely = 0;
-
-        if(this.frogTimer < 2){
-          image(frog_jump, this.x, this.y, this.w, this.h);
-        }else{
-          image(frog_stand, this.x, this.y, this.w, this.h);
-        }
-        if(this.y > this.jumpTo && this.frogTimer == 0){
-          this.vely += -10;
-        } 
-        if(this.y <= this.jumpTo){
-          this.frogTimer = 4;
-        }
-        if(this.frogTimer > 0 && this.y < this.jumpFrom){
-          this.vely += 3;
+      if(this.boss){
+          if (frameCount % 60 == 0 && this.bossTimer > 0) {
+            this.bossTimer --;
+          }
+  
+          if(this.bossTimer <= 2 && this.vely == 0){
+            image(boss_pre_jump, this.x, this.y, this.w, this.h);
+          }else{
+            image(boss_stand, this.x, this.y, this.w, this.h);
+          }if(this.y < this.jumpFrom){
+            image(boss_jump, this.x, this.y, this.w, this.h);
+          }
+  
+          if (this.jumpFrom <= this.y){
+            this.vely = 0;
+            this.y = this.jumpFrom;
+            if(this.y < 2000 && this.y > 0){
+            }
+            if(this.y < 2000){
+              this.bossDirect = 1;
+            }
+            if(this.y > 0){
+              this.bossDirect = 0;
+            }
+          } else {
+            this.vely += FALLSPEED/2.5;
+            if(this.bossDirect  == 1){
+              this.x = this.x+4;
+            }
+            if(this.bossDirect == 0){
+              this.x = this.x-4;
+            }
+          }
+  
+          if(this.bossTimer == 0){
+            this.vely += JUMPPOWER;
+            this.bossTimer = 5;
+            this.bossDirect = random(0,1);
+            if(this.x > player.x){
+              this.x = this.x-40;
+              this.bossDirect =0;
+            }
+            if(this.x < player.x){
+              this.x = this.x+40;
+              this.bossDirect =1;
+            }
+          } 
+          
+          this.y += this.vely;
         }
       }
     }

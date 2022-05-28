@@ -32,8 +32,11 @@ class Background {
       }
     //layer 4
       translate(0,0,0);
-        image(tent,-300,-100,250,110);
-        image(campfire,-35,-40,50,50);
+    if(gameState == 2){
+      image(tent,-300,-100,250,110);
+      image(campfire,-35,-40,50,50);
+    }
+
     //layer 5
       translate(0,0,1);
       for (var imageLayer5X = -500; imageLayer5X < imageLength; imageLayer5X+=layer_1.width) {
