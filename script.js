@@ -73,13 +73,15 @@ Names.Frog = 4;
   spike11_lvl4 = new Block({x:1300,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
   spike12_lvl4 = new Block({x:1400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
 
-
+//Gamestate 5
   boss = new Enemy({x:500,   y:-300, w:300, h:300,color:[0,255,0], vis:false ,name:3,jumpTo:-550, jumpFrom:-300, lvl:5, boss:true, move:false,frog:true,  frog:false});
+  p1_lvl5 = new Block({x:0,   y:-200, w:10, h:200,color:[0,255,0], vis:false ,name:Names.Ground, lvl:5});
 
 //Object Arrays
   blocks = [ground, lwall, p1_lvl2, p2_lvl2, p3_lvl2, spike_lvl2, //<---Level1
            spike1_lvl3, p1_lvl3, spike2_lvl3, p2_lvl3, p3_lvl3, p4_lvl3,spike3_lvl3, spike4_lvl3, spike5_lvl3, spike6_lvl3, spike7_lvl3, spike8_lvl3, spike9_lvl3,spike10_lvl3, p5_lvl3, p6_lvl3, //<---Level2
-           p1_lvl4, p2_lvl4,p3_lvl4, p4_lvl4, p5_lvl4, p4_lvl3, spike1_lvl4, spike2_lvl4, spike3_lvl4, spike4_lvl4, spike5_lvl4, spike6_lvl4, spike7_lvl4, spike8_lvl4, spike9_lvl4,spike10_lvl4, spike11_lvl4, spike12_lvl4 //<---Level3
+           p1_lvl4, p2_lvl4,p3_lvl4, p4_lvl4, p5_lvl4, p4_lvl3, spike1_lvl4, spike2_lvl4, spike3_lvl4, spike4_lvl4, spike5_lvl4, spike6_lvl4, spike7_lvl4, spike8_lvl4, spike9_lvl4,spike10_lvl4, spike11_lvl4, spike12_lvl4, //<---Level3
+            p1_lvl5 //<---Bossfight
            ];
   console.log(blocks)
   enemies = [snail1_lvl2, snail2_lvl2, snail3_lvl2, //<---Level1
@@ -206,7 +208,7 @@ function draw(){
     
       if(keyIsDown(82) || player.x > 2000){
       gameState = 5;
-      player.x = -200;
+      player.x = 0;
     }
   } else if(gameState == 5){
       //background
@@ -226,7 +228,26 @@ function draw(){
       }
       currentLevel = 5;
       storeItem('currentLevel', currentLevel);
+  }else if(gameState == 6){
+      //background
+      visual();
+    
+      //sign
+      image(sign_5, 30,-50, 50,50);
+
+      //player
+      if (alive){
+        player.draw();
+        player.move();
+        player.camera();
+      } else{
+        player.dead();
+      }
+      currentLevel = 6;
+      storeItem('currentLevel', currentLevel);
   }
+
+  
 }
 
 //Check for button press
@@ -239,8 +260,7 @@ function mouseClicked() {
       if (mouseY > 320 && mouseY < 370) {
         crickets.loop();
         cutscene.play();
-
-
+        boss.x = 500;
 
         if (typeof(getItem('currentLevel')) == "undefined") {
           currentLevel = 1;
@@ -266,14 +286,8 @@ function mouseClicked() {
       }
     }
   } else if (!alive) {
-    if (mouseX > 360 && mouseX < 840) {
-      if (mouseY > 350 && mouseY < 420) {
-        music.loop();
-        player.x = 8;      
-        player.y = -110;
-        alive = true;
-        gameState = currentLevel;
-      } else if (mouseY > 440 && mouseY < 515) {
+    if (mouseX > 282  && mouseX < 931) {
+      if (mouseY > 500 && mouseY < 564) {
         player.x = 8;      
         player.y = -110;
         alive = true;
@@ -293,7 +307,9 @@ function die() {
 
 //after cutscene is done playing
 function pstate() {
-  gameState = 2;
+  if(gameState == 1){
+    gameState = 2;
+  }
 }
 
 function visual() {

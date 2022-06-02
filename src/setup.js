@@ -12,7 +12,7 @@
     tent = loadImage('data/random/tent.png');
     campfire = loadImage('data/random/campfire.gif');
     spikes = loadImage('data/random/3-spikes.png');
-    deathscreen = loadImage('data/random/menu/deadscreen.png');
+    deathscreen = loadImage('data/random/menu/deadscreen.webp');
     snail_right = loadImage('data/random/snail/snail-right.png');
     snail_left = loadImage('data/random/snail/snail-left.png');
     frog_stand = loadImage('data/random/snail/frog-stand.png');
@@ -24,6 +24,7 @@
     boss_jump = loadImage('data/random/boss/boss-jump.png');
     boss_stand = loadImage('data/random/boss/boss-stand.png');
     boss_pre_jump = loadImage('data/random/boss/boss-pre-jump.gif');
+    bossbar = loadImage('data/random/boss/bossbar.png');
     
       
   //Forest layers
@@ -68,6 +69,8 @@
     character_run_left = loadImage('data/player/running_left.gif');
     dead_right = loadImage('data/player/dead_right.png');
     dead_left = loadImage('data/player/dead_left.png');
+    attack_left = loadImage('data/player/attack_left.gif');
+    attack_right = loadImage('data/player/attack_right.gif');
 
   //Extra
   }

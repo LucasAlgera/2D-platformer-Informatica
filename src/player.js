@@ -110,7 +110,6 @@ class Player{
         image(character_stand_left, this.x, this.y, this.w, this.h);
       }
     }
-      
   }
   
 //Camera position (player.camera)
@@ -131,7 +130,7 @@ class Player{
       image(dead_left, this.x, this.y, this.w, this.h);
     }
     //Deadscreen
-    image(deathscreen, camerax - W/2,-H + 130, W ,H);
+    image(deathscreen, camerax - W/2-50,-H+50 + 130, W+100 ,H-100);
     //Respawn or Title screen
   }
 }

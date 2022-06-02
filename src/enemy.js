@@ -20,6 +20,7 @@ class Enemy{
     this.boss = options.boss;
     this.frog = options.frog;
     this.bossDirect = 0;
+    this.bossHP = 370;
     
     this.halfWidth = this.w / 2;
     this.halfHeight = this.h / 2 ;
@@ -82,7 +83,7 @@ class Enemy{
           this.y += this.vely;
         }
 
-      if(this.boss){
+      if(this.boss && gameState == 5 && this.bossHP > 0){
           if (frameCount % 60 == 0 && this.bossTimer > 0) {
             this.bossTimer --;
           }
@@ -128,9 +129,22 @@ class Enemy{
               this.x = this.x+40;
               this.bossDirect =1;
             }
-          } 
+          }
+        if(player.x > this.x -150 && player.x < this.x + this.w + 100){
+          if (keyIsDown(69)) {
+            this.bossHP -= 2;
+          }    
+        }
+        if(this.bossHP <= 0){
+          gameState = 6;
+          player.x = -200;
+        }
           
           this.y += this.vely;
+          fill(255,0,0);    
+          noStroke();
+          rect(camerax - W/2+400,-H+100 + 130, this.bossHP ,25);
+          //image(bossbar, camerax - W/2+300,-H+80 + 130, W-710 ,75);
         }
       }
     }
