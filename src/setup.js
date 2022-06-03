@@ -59,6 +59,8 @@
     music = loadSound('data/sound/music.mp3');
     walking = loadSound('data/sound/running-in-grass.mp3')
     hey = loadSound('data/sound/hey.mp3')
+    hit = loadSound('data/sound/sword-hit.mp3')
+    boss_music = loadSound('data/sound/boss_music.mp3')
   //video
     //cutscene = createVideo(['data/video/cutscene.mp4']);
 

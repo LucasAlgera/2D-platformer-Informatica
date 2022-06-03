@@ -21,6 +21,7 @@ class Enemy{
     this.frog = options.frog;
     this.bossDirect = 0;
     this.bossHP = 370;
+    this.hitTimer = 1
     
     this.halfWidth = this.w / 2;
     this.halfHeight = this.h / 2 ;
@@ -131,8 +132,13 @@ class Enemy{
             }
           }
         if(player.x > this.x -150 && player.x < this.x + this.w + 100){
-          if (keyIsDown(69)) {
-            this.bossHP -= 2;
+          if (frameCount % 60 == 0 && this.hitTimer > 0) {
+            this.hitTimer --;
+          }
+          if (keyIsDown(69) && this.hitTimer == 0) {
+            this.bossHP -= 8;
+            this.hitTimer = 1;
+            hit.play();
           }    
         }
         if(this.bossHP <= 0){

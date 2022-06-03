@@ -111,7 +111,7 @@ function setup() {
 
 
 function draw(){  
-  background(0);
+  background(255, 255, 255);
   //gameStates
   if(gameState == 10){
     image(exitscreen, camerax-W/2, -550);
@@ -213,6 +213,10 @@ function draw(){
   } else if(gameState == 5){
       //background
       visual();
+      if (music.isPlaying()){
+        music.stop();
+        boss_music.loop();
+      }
     
       //sign
       image(sign_4, 30,-50, 50,50);
