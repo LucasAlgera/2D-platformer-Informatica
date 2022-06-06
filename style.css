@@ -1,13 +1,26 @@
-
-body {
+html, body {
   display: flex;
   flex-direction: column;
   align-content: center;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  }
+  margin:0px;
+  height:100vh;
+  color: white;
+}
 
 canvas {
   display: block;
 }
+
+.background {
+  background:black;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+  z-index: -10;
+}
+

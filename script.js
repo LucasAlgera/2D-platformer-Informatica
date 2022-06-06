@@ -124,7 +124,6 @@ function draw(){
         cutscene.play();
         gameState = 1;
       }
-
   } else if(gameState == 1){
       image(cutscene, camerax-W/2, -550,W,H);
       if(keyIsDown(32)){
@@ -132,7 +131,8 @@ function draw(){
         cutscene.stop()
       }
     cutscene.onended(pstate); //check when cutscene is done playing
-
+      currentLevel = 1;
+      storeItem('currentLevel', currentLevel);
       
   } else if(gameState == 2){ //GAME STATE 2
       //background
@@ -160,6 +160,9 @@ function draw(){
     if(keyIsDown(82) || player.x > 1650){
       gameState = 3;
       player.x = -200;
+      if (!music.isPlaying()){
+        music.loop();
+      }
     }
 
        
@@ -186,6 +189,9 @@ function draw(){
       if(keyIsDown(82) || player.x > 2500){
       gameState = 4;
       player.x = -200;
+      if (!music.isPlaying()){
+        music.loop();
+      }
     }
   } else if(gameState == 4){
       //background
@@ -209,13 +215,13 @@ function draw(){
       if(keyIsDown(82) || player.x > 2000){
       gameState = 5;
       player.x = 0;
+      boss_music.loop();
     }
   } else if(gameState == 5){
       //background
       visual();
       if (music.isPlaying()){
         music.stop();
-        boss_music.loop();
       }
     
       //sign
@@ -247,11 +253,14 @@ function draw(){
       } else{
         player.dead();
       }
+      boss_music.stop();
       currentLevel = 6;
       storeItem('currentLevel', currentLevel);
+      if(player.x > 500){
+        gameState = 0;
+        player.x = 0;
+    }
   }
-
-  
 }
 
 //Check for button press
@@ -275,6 +284,9 @@ function mouseClicked() {
         currentLevel = getItem('currentLevel');
         if (currentLevel === null) {
            currentLevel = 1;
+        }
+        if(currentLevel == 6){
+          currentLevel = 1;
         }
         gameState = currentLevel;
       }
