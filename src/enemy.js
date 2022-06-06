@@ -84,7 +84,7 @@ class Enemy{
           this.y += this.vely;
         }
 
-      if(this.boss && gameState == 5 && this.bossHP > 0){
+      if(this.boss && gameState == 6 && this.bossHP > 0){
           if (frameCount % 60 == 0 && this.bossTimer > 0) {
             this.bossTimer --;
           }
@@ -142,7 +142,7 @@ class Enemy{
           }    
         }
         if(this.bossHP <= 0){
-          gameState = 6;
+          gameState = 7;
           player.x = -200;
         }
           

@@ -74,8 +74,8 @@ Names.Frog = 4;
   spike12_lvl4 = new Block({x:1400,   y:-50, w:100, h:50,color:[0,255,0], vis:false ,name: Names.Spike, lvl:4});
 
 //Gamestate 5
-  boss = new Enemy({x:500,   y:-300, w:300, h:300,color:[0,255,0], vis:false ,name:3,jumpTo:-550, jumpFrom:-300, lvl:5, boss:true, move:false,frog:true,  frog:false});
-  p1_lvl5 = new Block({x:0,   y:-200, w:10, h:200,color:[0,255,0], vis:false ,name:Names.Ground, lvl:5});
+  boss = new Enemy({x:500,   y:-300, w:300, h:300,color:[0,255,0], vis:false ,name:3,jumpTo:-550, jumpFrom:-300, lvl:6, boss:true, move:false,frog:true,  frog:false});
+  p1_lvl5 = new Block({x:0,   y:-200, w:10, h:200,color:[0,255,0], vis:false ,name:Names.Ground, lvl:6});
 
 //Object Arrays
   blocks = [ground, lwall, p1_lvl2, p2_lvl2, p3_lvl2, spike_lvl2, //<---Level1
@@ -105,6 +105,8 @@ function setup() {
   //cutscene
     cutscene = createVideo(['data/video/cutscene.mp4']);
     cutscene.hide(); //puts video inside of the canvas
+    cutscene2 = createVideo(['data/video/cutscene2.mov']);
+    cutscene2.hide(); //puts video inside of the canvas
 
   //local storage for levels
 }
@@ -216,8 +218,19 @@ function draw(){
       gameState = 5;
       player.x = 0;
       boss_music.loop();
+      cutscene2.play();
     }
   } else if(gameState == 5){
+      translate(0,0,-68);
+      image(cutscene2, camerax-W/2-40, -530,W,H);
+      if(keyIsDown(32)){
+        gameState = 6;
+        cutscene2.stop()
+      }
+    cutscene2.onended(pstate); //check when cutscene is done playing
+      currentLevel = 5;
+      storeItem('currentLevel', currentLevel);
+  }else if(gameState == 6){
       //background
       visual();
       if (music.isPlaying()){
@@ -236,9 +249,9 @@ function draw(){
       } else{
         player.dead();
       }
-      currentLevel = 5;
+      currentLevel = 6;
       storeItem('currentLevel', currentLevel);
-  }else if(gameState == 6){
+  }else if(gameState == 7){
       //background
       visual();
     
@@ -254,7 +267,7 @@ function draw(){
         player.dead();
       }
       boss_music.stop();
-      currentLevel = 6;
+      currentLevel = 7;
       storeItem('currentLevel', currentLevel);
       if(player.x > 500){
         gameState = 0;
@@ -285,7 +298,7 @@ function mouseClicked() {
         if (currentLevel === null) {
            currentLevel = 1;
         }
-        if(currentLevel == 6){
+        if(currentLevel == 7){
           currentLevel = 1;
         }
         gameState = currentLevel;
@@ -325,6 +338,9 @@ function die() {
 function pstate() {
   if(gameState == 1){
     gameState = 2;
+  }
+  if(gameState == 5){
+    gameState = 6;
   }
 }
 
