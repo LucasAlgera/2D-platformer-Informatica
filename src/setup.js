@@ -25,7 +25,7 @@
     boss_stand = loadImage('data/random/boss/boss-stand.png');
     boss_pre_jump = loadImage('data/random/boss/boss-pre-jump.gif');
     bossbar = loadImage('data/random/boss/bossbar.png');
-    
+    tip_screen = loadImage('data/random/tipscreen.png');
       
   //Forest layers
     layer_1 = loadImage('data/background/Layer_0000_9.png');

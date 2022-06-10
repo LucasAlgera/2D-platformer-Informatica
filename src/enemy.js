@@ -150,6 +150,9 @@ class Enemy{
           fill(255,0,0);    
           noStroke();
           rect(camerax - W/2+400,-H+100 + 130, this.bossHP ,25);
+          if(this.bossHP > 300){
+            image(tip_screen, camerax - W/2+200,-H+100 + 130, 150, 80)
+          }
           //image(bossbar, camerax - W/2+300,-H+80 + 130, W-710 ,75);
         }
       }
