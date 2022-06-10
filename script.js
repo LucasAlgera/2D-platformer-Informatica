@@ -258,6 +258,8 @@ function draw(){
     
       //sign
       image(sign_5, 30,-50, 50,50);
+      image(sign_go, 500,-50, 50,50);
+    image(log_pile, 200,-74, 200,74);
 
       //player
       if (alive){
