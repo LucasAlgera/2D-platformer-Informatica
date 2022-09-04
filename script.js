@@ -275,6 +275,7 @@ function draw(){
       if(player.x > 500){
         gameState = 0;
         player.x = 0;
+        boss.bossHP = 370;
     }
   }
 }
